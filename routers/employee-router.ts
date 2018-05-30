@@ -4,13 +4,13 @@ import {r} from './r-router';
 export const employeeRouter = express.Router();
 
 
-console.log(r);
-
+//console.log(r);
+let reimb = r;
 /*
 * veriying user logged in  
 */
-let logged = false;
-
+let logged = true;
+let currentlyLogged ={};
 
 let emp =[
 
@@ -65,7 +65,7 @@ employeeRouter.get('',(req:Request,resp:Response)=>{
 employeeRouter.get('/name/:name', (req:Request,resp:Response) =>{
 
     const name=req.params.name;
-    console.log(`retreiving reinbustment with name ${name}`);
+    console.log(`retreiving employee with name ${name}`);
     for (let p of emp){
         if(p.userName === name){
             resp.json(p);
@@ -79,7 +79,7 @@ employeeRouter.get('/name/:name', (req:Request,resp:Response) =>{
 
     employeeRouter.post ('',(req:Request,resp:Response)=>{
 
-        console.log(`adding reinbustment: ${JSON.stringify(req.body)}to reinbustments`)
+        console.log(`adding employee: ${JSON.stringify(req.body)}to reinbustments`)
         // if(!req.body.name || !req.body.size){
         //     resp.sendStatus(400);
         // }else{
@@ -124,9 +124,31 @@ employeeRouter.get('/name/:name', (req:Request,resp:Response) =>{
             for( let e of emp ){
                 if(e.userName === body.username && e.password === body.password){
                 console.log("user found")
+                currentlyLogged = e;
+
+                logged = true ;  
                      }else console.log("user not found");
                                          
                 }
              
                  
+    });
+
+    employeeRouter.get ('/name/:name/r',(req:Request,resp:Response)=>{
+        console.log(currentlyLogged);
+        console.log (!currentlyLogged) 
+    if (logged){
+
+        resp.redirect(`/r/name/${req.params.name}`);
+
+    }else{
+
+        console.log("no users currently logged");
+        resp.send('action not valid');
+
+    }
+    
+     
+
+
     });
