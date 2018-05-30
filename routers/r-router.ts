@@ -35,7 +35,46 @@ status   : 'approved'
     status   : 'approved'
 
 
+},
+{
+
+    userName : 'Ped100'   ,
+    timeSubmitted : 1     ,
+    approver : 'aprover1' , 
+    status   : 'approved' 
+    
+    
+    
+    
+},
+
+{
+
+    userName : 'Ped100'   ,
+    timeSubmitted : 1     ,
+    approver : 'aprover1' , 
+    status   : 'denied' 
+    
+    
+    
+    
+},
+
+{
+
+    userName : 'Ped100'   ,
+    timeSubmitted : 1     ,
+    approver : 'aprover1' , 
+    status   : 'pending' 
+    
+    
+    
+    
 }
+
+
+
+
 ]
 
 
@@ -50,17 +89,64 @@ rRouter.get('',(req:Request,resp:Response)=>{
 rRouter.get('/name/:name', (req:Request,resp:Response) =>{
 
     const name=req.params.name;
+    let list=[];
     console.log(`retreiving reinbustment with name ${name}`);
     for (let p of r){
+        
         if(p.userName === name){
-            resp.json(p);
-            return;
+            console.log(p);
+            list.push(p);
+           
     
         }
     }
+
+    resp.json(list);
     
     
     });
+
+    rRouter.get('/name/:name/h', (req:Request,resp:Response) =>{
+
+        const name=req.params.name;
+        let list=[];
+        console.log(`retreiving reinbustment with name ${name}`);
+        for (let p of r){
+            
+            if(p.userName === name && (p.status === 'approved'|| p.status === 'denied' )){
+                console.log(p);
+                list.push(p);
+               
+        
+            }
+        }
+        
+    
+        resp.json(list);
+        
+        
+        });
+
+
+        rRouter.get('/name/:name/p', (req:Request,resp:Response) =>{
+
+            const name=req.params.name;
+            let list=[];
+            console.log(`retreiving reinbustment with name ${name}`);
+            for (let p of r){
+                
+                if(p.userName === name && p.status === 'pending'){
+                    console.log(p);
+                    list.push(p);
+                   
+            
+                }
+            }
+        
+            resp.json(list);
+            
+            
+            });
 
     rRouter.post ('',(req:Request,resp:Response)=>{
 
