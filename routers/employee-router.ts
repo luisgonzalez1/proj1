@@ -9,7 +9,7 @@ let reimb = r;
 /*
 * veriying user logged in  
 */
-let logged = true;
+let logged = false;
 let currentlyLogged ={};
 
 let emp =[
@@ -140,6 +140,45 @@ employeeRouter.get('/name/:name', (req:Request,resp:Response) =>{
     if (logged){
 
         resp.redirect(`/r/name/${req.params.name}`);
+
+    }else{
+
+        console.log("no users currently logged");
+        resp.send('action not valid');
+
+    }
+    
+     
+
+
+    });
+
+    employeeRouter.get ('/name/:name/h',(req:Request,resp:Response)=>{
+        console.log(currentlyLogged);
+        console.log (!currentlyLogged) 
+    if (logged){
+
+        resp.redirect(`/r/name/${req.params.name}/h`);
+
+    }else{
+
+        console.log("no users currently logged");
+        resp.send('action not valid');
+
+    }
+    
+     
+
+
+    });
+
+
+    employeeRouter.get ('/name/:name/p',(req:Request,resp:Response)=>{
+        console.log(currentlyLogged);
+        console.log (!currentlyLogged) 
+    if (logged){
+
+        resp.redirect(`/r/name/${req.params.name}/p`);
 
     }else{
 
