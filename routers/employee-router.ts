@@ -1,6 +1,7 @@
 import express from 'express'
 import {Request, Response, NextFunction} from 'express'
 import {r} from './r-router';
+import * as employeeService from '../services/employee-service'
 export const employeeRouter = express.Router();
 
 
@@ -61,43 +62,49 @@ employeeRouter.get('',(req:Request,resp:Response)=>{
 
 });
 
-
+ 
 employeeRouter.get('/name/:name', (req:Request,resp:Response) =>{
+                console.log(typeof(req.params.name));         
+                
+    employeeService.getEmp(req.params.name)
+        .then(data=>{//data obgect containg data retrieved from DB 
+                     //data.Item reffers to the actual object body
+                     console.log(data);
+            resp.json(data.Items);
+            console.log("data retrieved ");            
+        })
+        .catch(err => {
+            console.log(err);
+            resp.sendStatus(500);
+            console.log("data not retrieved ");
 
-    const name=req.params.name;
-    console.log(`retreiving employee with name ${name}`);
-    for (let p of emp){
-        if(p.userName === name){
-            resp.json(p);
-            return;
+
+        });   
+
+     
     
-        }
-    }
-    
-    
-    });
+    });// end get emp 
+
+     
 
     employeeRouter.post ('',(req:Request,resp:Response)=>{
+        console.log(req.body);
 
-        console.log(`adding employee: ${JSON.stringify(req.body)}to reinbustments`)
-        // if(!req.body.name || !req.body.size){
-        //     resp.sendStatus(400);
-        // }else{
-            const p = {
-                userName :req.body.userName,
-                password: req.body.password,
-                firstName:req.body.firstName,  
-                lastName:req.body.lastName,
-                email:req.body.email ,
-                role:req.body.role  // or maybe “admin”
-        
-            }
-            emp.push(p);
-            resp.sendStatus(201)
-        
-        // }
+         
+        employeeService.saveEmp(req.body)
+        .then(()=>{
+            
+            console.log('User saved sucessfully');
+            resp.sendStatus(201);
 
-    });
+
+        })
+        .catch(err=>{
+            console.log(err);
+        resp.sendStatus(500);
+        })
+
+    }); // end empl post 
 
 
     employeeRouter.delete('/name/:name',(req:Request,resp:Response)=>{
