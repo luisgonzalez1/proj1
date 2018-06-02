@@ -53,12 +53,74 @@ let emp =[
 }
 ]
 
-
+ 
 
 
 employeeRouter.get('',(req:Request,resp:Response)=>{
-    console.log('retrieving all reimbuersements');
-    resp.json(emp);
+   
+   employeeService.getTime();
+   // console.log(t2);
+   // console.log(t);
+    console.log('retrieving all employee');
+    let allData ={};
+    //will hold data retrieved from   employeeService.getAllRoleEmp() 
+    //and  employeeService.getAllRoleAdmin() 
+    
+
+    employeeService.getAllRoleEmp() // GSI holds primary key  field role =employee 
+         .then((empData)=>{// first then 
+        
+        //inside first promise 
+        //infor stored in empData will bw assigned to the allData 
+        allData=empData;
+      
+        
+        employeeService.getAllRoleAdmin() //GSI holds primary key  field role =admin 
+                    .then((adminData)=>{ // second then 
+
+                        console.log('inside second promise')
+                    
+                        // combine employees and admins in allData
+                        let counter = allData["Items"].length
+                        for(let i =0 ; i<adminData["Items"].length ; i++ ){
+                            
+                            
+                            
+                            allData["Items"][counter] = adminData["Items"][i];
+                            
+                            
+                            counter++;
+                            
+                        }
+
+                        //console.log(allData);
+                        resp.json(allData["Items"]);
+
+                    })
+
+                    .catch((err)=>{// second then 
+                    
+                        console.log(err);
+                        console.log('was not able to retrieve data');
+                        resp.sendStatus(500);
+                
+                
+                    });
+
+       
+        
+
+    })
+    .catch((err)=>{// first then 
+        
+        console.log(err);
+        console.log('was not able to retrieve data');
+        resp.sendStatus(500);
+
+
+    });
+
+ 
 
 });
 

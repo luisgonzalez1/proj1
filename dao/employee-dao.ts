@@ -70,3 +70,61 @@ respectively
 }).promise()
 
 }
+export function getAllRoleEmp():Promise<any>{
+
+let emp = 'employee';
+let admin = 'admin';
+return docClient.query({
+   
+TableName: 'user',
+IndexName :'role-index',
+KeyConditionExpression: '#r = :emp',
+ 
+ 
+//'#r IN (:emp , :admin)'
+ExpressionAttributeNames:{
+
+  '#r': 'role'
+},
+
+ExpressionAttributeValues: {  
+  ':emp': emp,
+  //':admin':admin
+},
+ 
+
+  }).promise()
+
+
+
+}
+
+
+export function getAllRoleAdmin():Promise<any>{
+
+  let emp = 'employee';
+  let admin = 'admin';
+  return docClient.query({
+     
+  TableName: 'user',
+  IndexName :'role-index',
+  KeyConditionExpression: '#r = :admin',
+   
+   
+  //'#r IN (:emp , :admin)'
+  ExpressionAttributeNames:{
+  
+    '#r': 'role'
+  },
+  
+  ExpressionAttributeValues: {  
+    //':emp': emp,
+    ':admin':admin
+  },
+   
+  
+    }).promise()
+  
+  
+  
+  }
