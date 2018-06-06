@@ -14,7 +14,7 @@ const docClient = new aws.DynamoDB.DocumentClient(); // subset of functionality 
 
 export function saveR(r): Promise<any> {
     return docClient.put({
-      TableName: 'reimburstments',
+      TableName: 'reimburstments2',
       Item: r
     }).promise();
   }
@@ -23,10 +23,10 @@ export function getR(username:string , timeSub:string):Promise<any>{
 
 return docClient.get({
 
-TableName: 'reimburstments',
+TableName: 'reimburstments2',
 Key: {
     username: username,
-    time_submited: timeSub
+    timeSubmited: timeSub
   }
 
 }).promise()
@@ -38,7 +38,7 @@ export function viewPending(username:string):Promise<any>{
   let status = 'pending';
   return docClient.query({
 
-  TableName:'reimburstments',
+  TableName:'reimburstments2',
   IndexName:'username-status-index',
   KeyConditionExpression: '#user = :user AND #stat =:status',
   
@@ -60,7 +60,7 @@ export function viewHistory(username:string):Promise<any>{
   let denied = 'denied';
   return docClient.query({
 
-  TableName:'reimburstments',
+  TableName:'reimburstments2',
   IndexName:'username-index',
   KeyConditionExpression: '#user = :user',
 

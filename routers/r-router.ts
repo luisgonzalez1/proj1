@@ -1,10 +1,10 @@
 import express from 'express'
 import {Request, Response, NextFunction} from 'express'
 import * as rService from '../services/r-service'
-
+import {Time} from  '../assests/time'
 
 export const rRouter = express.Router();
-
+let t = new Time();
 
 export let r =[
 
@@ -229,12 +229,15 @@ rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
             });
 
     rRouter.post ('',(req:Request,resp:Response)=>{
-                let time = rService.getTime();
+                let time = t.getCurrentTime();    
             let reimb ={
                 username : req.body.username,
-                time_submited : time,
+                timeSubmitted : time,
                 approver:req.body.approver,
-                status:req.body.status
+                status:req.body.status,
+                item:req.body.item  /// be better using put 
+                 
+
             }
 
             console.log(reimb);
@@ -260,25 +263,7 @@ rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
 
 
 
-    //     console.log(`adding reinbustment: ${JSON.stringify(req.body)}to reinbustments`)
-    //     // if(!req.body.name || !req.body.size){
-    //     //     resp.sendStatus(400);
-    //     // }else{
-    //         const p = {
-    //             userName : req.body.userName   ,
-    //             timeSubmitted :req.body.timeSubmitted   ,
-    //             approver : req.body.approver , 
-    //             status   : req.body.status
-        
-    //         }
-    //         r.push(p);
-    //         resp.sendStatus(201)
-        
-    //     // }
-
-    // });
-
-
+    
     rRouter.delete('/name/:name',(req:Request,resp:Response)=>{
         r =r.filter((p)=>p.userName !== req.params.userName)
             resp.end();
