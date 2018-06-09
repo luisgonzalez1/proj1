@@ -32,7 +32,7 @@ app.use((req :Request, resp:Response,next:NextFunction)=>{
 
     console.log(`request was made with url: ${req.path}
     
-        
+            
     ad method:${req.method}`);
 
     next();
@@ -42,12 +42,18 @@ app.use((req :Request, resp:Response,next:NextFunction)=>{
 //Register the body parser to convert request json to an actual object 
 app.use(bodyParser.json());
 
-// allow cross origins
-app.use((req, resp, next) => {
-    resp.header('Access-Control-Allow-Origin', '*');
-    resp.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-  });
+//allow cross origins
+// app.use((req, resp, next) => {
+//    resp.header('Access-Control-Allow-Origin', '*');
+//    resp.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept .Authorization');
+//   if (req.method === 'OPTIONS'){
+
+//     resp.header('Access-Control-Allow-Methods', 'PUT,POST,PATCH,DELETE,GET');
+//     console.log('passed cors');
+//   }
+
+//    next();
+//   });
 
 /*******************************************************************************
  * Register Routers

@@ -10,48 +10,9 @@ let reimb = r;
 /*
 * veriying user logged in  
 */
-let logged = false;
-let currentlyLogged ={};
+// let logged = false;
+// let currentlyLogged ={};
 
-let emp =[
-
-{
-
-    userName:'Hec100' , // partition key
-    password:'1234'  ,
-	firstName:'Hector',  
-	lastName:'Figueroa',
-	email:'hector.@1234.com'  ,
-	role:'employee'  // or maybe “admin”
-
-
-
-},
-{
-
-    userName:'Ped100' , // partition key
-    password:'1234'  ,
-	firstName:'Pedro',  
-	lastName:'Hernandez',
-	email:'pedro.@1234.com'  ,
-	role:'employee'  // or maybe “admin”
-
-
-
-
-},
-{
-
-    userName :'carl100',
-    password:'1234',
-	firstName:'Carlos',  
-	lastName:'White',
-	email:'carlos.@1234.com'  ,
-	role:'employee'  // or maybe “admin”
-
-
-}
-]
 
  
 
@@ -169,94 +130,159 @@ employeeRouter.get('/name/:name', (req:Request,resp:Response) =>{
     }); // end empl post 
 
 
-    employeeRouter.delete('/name/:name',(req:Request,resp:Response)=>{
-        emp =emp.filter((p)=>p.userName !== req.params.userName)
-            resp.end();
-            
-        });
-
     
-    employeeRouter.get('/login',(req:Request,resp:Response)=>{
-        resp.send('please enter userName');
+
+    employeeRouter.post('/login',(req:Request,resp:Response, next)=>{
+       // resp.send('please enter userName and password');
+        const user = req.body && req.body;
+
+          
+
+        
+
+                     employeeService.getEmp(req.body.username)
+                        .then(data=>{//data obgect containg data retrieved from DB 
+                         //data.Item reffers to the actual object body
+                         console.log(data);
+
+                         if (req.body.username === 'admin' && req.body.password === 'admin') {
+                            req.session.role = 'admin';
+                            resp.json({
+                              username: 'admin',
+                              role: 'admin'});
+
+                          } else if (req.body.username === data.Items[0].username && req.body.password === data.Items[0].password) {
+                            req.session.role = 'employee';
+                            console.log('logged sucessfully');
+                            resp.json({
+                              username: data.Items[0].username,
+                              role: data.Items[0].role});
+                          } else {
+                            resp.sendStatus(401);
+                          }
+                        })
+                       .catch((err)=>{
+                        
+                            console.log(err);
+                            resp.sendStatus(400);
+                           
+                        });
+
+                    
+                });
 
 
+ 
+    
+               
+
+        // should probably send a call to the db to get the actual user object to determine role
+       
+
+      /**
+ * This will reset the session so that all session data is removed and a new session id will be created
+ */
+    employeeRouter.delete('/logout', (req, resp, next) => {
+    req.session.regenerate(err => {
+      if (err) {
+        resp.sendStatus(500);
+      } else {
+        resp.end();
+      }
     });
+  });
+  
 
-    employeeRouter.post('/login',(req:Request,resp:Response)=>{
-        resp.send('please enter userName and password');
-        let body=req.body;
 
-        // console.log(body);
+    // employeeRouter.get ('/name/:name/r',(req:Request,resp:Response)=>{
+    //     console.log(currentlyLogged);
+    //     console.log (!currentlyLogged) 
+    // if (logged){
 
-        // console.log(body.username);
-        // console.log(body.password);
-            for( let e of emp ){
-                if(e.userName === body.username && e.password === body.password){
-                console.log("user found")
-                currentlyLogged = e;
+    //     resp.redirect(`/r/name/${req.params.name}`);
 
-                logged = true ;  
-                     }else console.log("user not found");
+    // }else{
+
+    //     console.log("no users currently logged");
+    //     resp.send('action not valid');
+
+    // }
+    
+     
+
+
+    // });
+
+    // employeeRouter.get ('/name/:name/h',(req:Request,resp:Response)=>{
+    //     console.log(currentlyLogged);
+    //     console.log (!currentlyLogged) 
+    // if (logged){
+
+    //     resp.redirect(`/r/name/${req.params.name}/h`);
+
+    // }else{
+
+    //     console.log("no users currently logged");
+    //     resp.send('action not valid');
+
+    // }
+    
+     
+
+
+    // });
+
+
+    // employeeRouter.get ('/name/:name/p',(req:Request,resp:Response)=>{
+    //     console.log(currentlyLogged);
+    //     console.log (!currentlyLogged) 
+    // if (logged){
+
+    //     resp.redirect(`/r/name/${req.params.name}/p`);
+
+    // }else{
+
+    //     console.log("no users currently logged");
+    //     resp.send('action not valid');
+
+    // }
+    
+     
+
+
+    // });
+
+
+    // employeeRouter.post('/login',(req:Request,resp:Response)=>{
+    //     resp.send('please enter userName and password');
+    //     let body=req.body;
+
+    //     // console.log(body);
+
+    //     // console.log(body.username);
+    //     // console.log(body.password);
+    //         for( let e of emp ){
+    //             if(e.userName === body.username && e.password === body.password){
+    //             console.log("user found")
+    //             currentlyLogged = e;
+
+    //             logged = true ;  
+    //                  }else console.log("user not found");
                                          
-                }
+    //             }
              
                  
-    });
+    // });
 
-    employeeRouter.get ('/name/:name/r',(req:Request,resp:Response)=>{
-        console.log(currentlyLogged);
-        console.log (!currentlyLogged) 
-    if (logged){
+    // employeeRouter.delete('/name/:name',(req:Request,resp:Response)=>{
+    //     emp =emp.filter((p)=>p.userName !== req.params.userName)
+    //         resp.end();
+            
+    //     });
 
-        resp.redirect(`/r/name/${req.params.name}`);
-
-    }else{
-
-        console.log("no users currently logged");
-        resp.send('action not valid');
-
-    }
     
-     
+    // employeeRouter.get('/login',(req:Request,resp:Response)=>{
+    //     resp.send('please enter userName');
 
 
-    });
-
-    employeeRouter.get ('/name/:name/h',(req:Request,resp:Response)=>{
-        console.log(currentlyLogged);
-        console.log (!currentlyLogged) 
-    if (logged){
-
-        resp.redirect(`/r/name/${req.params.name}/h`);
-
-    }else{
-
-        console.log("no users currently logged");
-        resp.send('action not valid');
-
-    }
-    
-     
-
-
-    });
-
-
-    employeeRouter.get ('/name/:name/p',(req:Request,resp:Response)=>{
-        console.log(currentlyLogged);
-        console.log (!currentlyLogged) 
-    if (logged){
-
-        resp.redirect(`/r/name/${req.params.name}/p`);
-
-    }else{
-
-        console.log("no users currently logged");
-        resp.send('action not valid');
-
-    }
-    
-     
-
-
-    });
+    // });

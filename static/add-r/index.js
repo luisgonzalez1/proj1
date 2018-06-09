@@ -1,5 +1,236 @@
+// // import {iObject} from '../../assests/r-Item'
+
+// let rForm = document.getElementsByClassName('rForm');
+// let inner;
+// let bottomForm;
+// let y =0;
+
+// inner= document.createElement('span'); 
+// let btn = document.createElement('span');
+// btn.setAttribute('id',  y ); 
+// btn.setAttribute('class', 'remove' ); 
+// btn.textContent ='X';
+// inner.appendChild(btn);          
+//  inner.setAttribute('id',  'formHead'+y );         
+  
+
+// for (let i = 0 ;i< rForm.length ; i++){             
+//   inner.innerHTML+=rForm[i].innerHTML;     
+  
+// }
+
+// bottomForm = document.getElementById('rFormAppend').appendChild(inner);
+
+// $('#formHead'+y).find('#validationCustomTitle').attr("id", 'validationCustomTitle'+y);
+
+                    
+// $('#formHead'+y).find('#validationCustomAmount').attr("id", 'validationCustomAmount'+y);
+
+                      
+// $('#formHead'+y).find('#validationCustomDescription').attr("id", 'validationCustomDescription'+y);
+
+// y++
+
+// let iObject = new RItem();  
+// let Reimb =new Reimbustment();
+// let firstIt = true;
+
+// $(document).on('click', '.radios', function(){    
+      
+//   let button_id = $(this).attr("id"); 
+//   let button = $(this);
+//   type = this.textContent;
+//   type =type.trim()
+//   //iObject.type=type ;
+   
+//     });
+
  
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+// // iObject.title = document.getElementById('validationCustomTitle').value;
+// // iObject.amount=parseInt(document.getElementById('validationCustomAmount').value);
+// // iObject.description =document.getElementById('validationCustomDescription').value;
+// // Reimb.items.push(iObject);
+ 
+
+
+function RItem()  {
+
+  this.type='';
+  this.title= '';
+  this.description='';
+  this.amount = '';
+  }
+
+  function Reimbustment (){
+  
+  this.username = 'no user name';
+  this.timeSubmitted=Date.now();
+  this.item=[];
+  this.approver='not approved';
+  this.status='pending';
+
+
+  }
+  
+ 
+
+// // Example starter JavaScript for disabling form submissions if there are invalid fields
+// (function() {
+//   'use strict';
+//   window.addEventListener('load', function() {
+//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//     var forms = document.getElementsByClassName('needs-validation');
+//     // Loop over them and prevent submission
+//     var validation = Array.prototype.filter.call(forms, function(form) {
+//       form.addEventListener('submit', function(event) {
+//         if (form.checkValidity() === false) {
+//           event.preventDefault();
+//           event.stopPropagation();
+//         }
+//         form.classList.add('was-validated');
+//       }, false);
+        
+//     });
+
+//     var validation = Array.prototype.filter.call(forms, function(form) {
+//       // let y =0;
+//       addB.addEventListener('click', function(event) {
+//         if (form.checkValidity() === false) {
+//           event.preventDefault();
+//           event.stopPropagation();
+          
+//          }else{      
+          
+//                        inner= document.createElement('span'); 
+//                       let btn = document.createElement('span');
+//                       btn.setAttribute('id',  y ); 
+//                       btn.setAttribute('class', 'remove' ); 
+//                       btn.textContent ='X';
+//                       inner.appendChild(btn);          
+//                        inner.setAttribute('id',  'formHead'+y );         
+                        
+
+//                       for (let i = 0 ;i< rForm.length ; i++){             
+//                         inner.innerHTML+=rForm[i].innerHTML;     
+                        
+//                       }
+
+//                       bottomForm = document.getElementById('rFormAppend').appendChild(inner);
+
+                       
+                        
+//                       $('#formHead'+y).find('#validationCustomTitle').attr("id", 'validationCustomTitle'+y);
+
+                    
+//                       $('#formHead'+y).find('#validationCustomAmount').attr("id", 'validationCustomAmount'+y);
+
+                      
+//                       $('#formHead'+y).find('#validationCustomDescription').attr("id", 'validationCustomDescription'+y);          
+
+//                       // if(!firstIt){
+//                         let iObject = new RItem();
+//                         iObject.type="Lodging"
+//                         console.log(y);
+//                         let prevForm = y-1;
+//                       iObject.title = document.getElementById('validationCustomTitle'+prevForm).value;
+//                       iObject.amount=parseInt(document.getElementById('validationCustomAmount'+prevForm).value);
+//                       iObject.description =document.getElementById('validationCustomDescription'+prevForm).value;
+//                       iObject.type=type.trim();
+//                        console.log(iObject);
+//                       Reimb.item.push(iObject);
+
+//                       //console.log(iObject);
+
+//                       // }else {
+//                       //   let iObject = new RItem();
+//                       //   iObject.type="Lodging"
+//                       //   console.log('firts iteration')
+//                       //   iObject.title = document.getElementById('validationCustomTitle').value;
+//                       //   iObject.amount=parseInt(document.getElementById('validationCustomAmount').value);
+//                       //   iObject.description =document.getElementById('validationCustomDescription').value;
+//                       //   iObject.type=type.trim() ;
+//                       //   Reimb.item[y] =iObject;
+//                       //   //console.log(iObject);
+//                       // }                   
+                      
+//                       y++; 
+                      
+//                       firstIt = false; 
+              
+//          }
+//          console.log(Reimb.item)
+//         form.classList.add('was-validated');
+        
+//       }, false);
+//     });
+
+//   }, false);
+// })();
+ 
+// // veriables for adding element
+// let addB = document.getElementById('addR');
+
+// // let rForm = document.getElementsByClassName('rForm');
+ 
+
+// //let bottomForm = document.getElementById('rFormAppend');
+// // let inner;
+// // let bottomForm;
+          
+// // varible for removing element 
+
+//  // had to use jQuery from removin from table 
+ 
+ 
+// $(document).on('click', '.remove', function(){
+//   let button_id = $(this).attr("id"); 
+//   let button = $(this);
+//   console.log(button_id);
+//  console.log($(button_id).closest('span')) 
+//  //$(this).closest('span').remove();    
+//  // console.log($(this).parent);
+//   //console.log(button_id)
+//   $(this).parent('#formHead'+button_id).remove();
+// y--;
+//   console.log(Reimb.item[button_id])
+//   Reimb.item.splice(button_id);
+   
+//   //let parent = document.getElementById('rFormAppend')    
+
+// });
+
+
+
+
+
+// /*
+// * add R 
+// */
+ 
+
+//   //  fetch('http://localhost:3000/r', {
+//   //     body: JSON.stringify(r),
+//   //     headers: {
+//   //       'content-type': 'application/json'
+//   //     },
+//   //     //credentials: 'include',
+//   //     method: 'POST'
+//   //   })
+//   //   .then(resp => {
+//   //     if (resp.status === 401 || resp.status === 403) {
+//   //       alert('invalid permissions')
+//   //       throw 'Invalid permissions';
+//   //     }
+//   //     return resp.json();
+//   //   })
+//   //   .then(data => {
+//   //     alert('created') // this is horrible, never use alerts
+//   //   })
+//   //   .catch(err => {
+//   //     console.log(err);
+//   //   });
+//   // }
+
 (function() {
   'use strict';
   window.addEventListener('load', function() {
@@ -12,249 +243,122 @@
           event.preventDefault();
           event.stopPropagation();
         }
-        
         form.classList.add('was-validated');
       }, false);
     });
-
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      let y =0;
-      addB.addEventListener('click', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-          
-         }else{          
-          
-           inner= document.createElement('span'); 
-           let btn = document.createElement('span');
-           btn.setAttribute('id',  y ); 
-           btn.setAttribute('class', 'remove' ); 
-           btn.textContent ='X';
-           //btn.setAttribute('type', 'button' ); 
-           inner.appendChild(btn);          
-           inner.setAttribute('id',  'formHead'+y ); 
-           
-          //  let btn = document.getElementsByName('span');
-          //  btn[y].setAttribute('id',inner.getAttribute('id'));
-           //setChild(y);
-           y++; 
-            
-
-           for (let i = 0 ;i< rForm.length ; i++){             
-            inner.innerHTML +=rForm[i].innerHTML;                
-          }  
-           
-         // bottomForm = document.getElementById('rFormAppend').appendChild(btn);
-           bottomForm = document.getElementById('rFormAppend').appendChild(inner);
-           
-            
-              
-         }
-        form.classList.add('was-validated');
-        
-      }, false);
-    });
-
-
-
-
   }, false);
 })();
+
+
+
  
-// veriables for adding element
-let addB = document.getElementById('addR');
+$(document).ready(function(){
+	let i=1;
+	$('#add').click(function(){
+    i++;
+    console.log('add pressed')
+    console.log(i);
+    $('#tbody').append(`
 
-let rForm = document.getElementsByClassName('rForm');
- 
+    
+    <tr id="row${i}">
 
-//let bottomForm = document.getElementById('rFormAppend');
-let inner;
-let bottomForm;
-          
-// varible for removing element 
-
-// let minusB = document.querySelectorAll('spanButton');
-// console.log(outside);
-// for (let i = 0 ;i< minusB.length ; i++){ 
-//    console.log(inside);
-//   console.log(minusB[i]);
-                
-// }  
-// if (minusB !==null ){
-// minusB.addEventListener('click' , ()=>{
-// for (let i = 0 ;i< minusB.length ; i++){ 
    
-//   console.log(minusB[i]);
-                
-// }  
-// let parent = document.getElementById('rFormAppend')
-// let minusB = document.querySelectorAll('button')
+ <td>
 
-//  });
-
-// }
-
-// minusB.addEventListener('click', ()=>{
-
-  
-// //for(let i = 0 ;i<child.length; i++){
-//  let parent = document.getElementById('rFormAppend')
-// let child= document.getElementById('0');
-// if (child !==null ){
-
-//   console.log(minusB.parentElement);
- 
-// console.log(parent);
-// console.log(child);
-
-// parent.removeChild(child);
-
-
-// }else{
-
-// console.log(' i am undefined');
-
-// }
-
-// //}
-
-// });
-
-// function setChild(num){
-  
-//   let num = num
-//   return toString(num)
-// };
-//function getChild{return toString(num)};
-
-//console.log(rForm);
-
- // let reimbItems=[];
-
-// for(let i = 0 ;i< rForm.length ; i++){
-
-//    if( rForm[i].getElementsByTagName('input') && rForm[i].getAttribute('type') === 'text' ){
-//     console.log(rForm[i]);
-
-//       reimbItems.push(rForm[i]);
-
-//    }
-        
      
+                      <select id='options'  class="custom-select">
+                      <option value="Lodging">Lodging</option>
+                      <option value="Travel">Travel</option>
+                      <option value="Food">Food</option>
+                      <option value="Other">Other</option>
+                    </select>
+
+    </td>
+
+
+  
     
-// } 
+    <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
 
-// console.log(reimbItems);
+    <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
 
-// let bottomForm = document.getElementById('rFormAppend');
-// let inner;
+    <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
 
+    <td><button type="button" name="remove" id=${i} class="btn btn-danger btn_remove">X</button></td>
+    
+    </tr>
+     
+      `);
+	});
+	
+	$(document).on('click', '.btn_remove', function(){
+    console.log('clicked');
+    let button_id = $(this).attr("id"); 
+    
+    $('#row'+button_id).remove();
 
-//   for(let i = 0 ;i< rForm.length ; i++){
-//      inner =rForm[i].innerHTML;
-
-//  }
-
-//  console.log(inner);
-
-//  addB.addEventListener('click',()=>{
-//   bottomForm.innerHTML+=` ${inner} `;
-   
-
-
+    i--
+    console.log(i)
+    
+	});
   
-// });
-// for(let i = 0 ;i< bottomForm.length ; i++){
-
-//   console.log(bottomForm[i]);
-//  }     
-
-
- //     body.innerHTML += `
-  //     <tr>
-  //       <td>${emp.role}</td>
-  //       <td>${emp.username}</td>
-        
-  //     </tr>
-//   `;
-
-
-// let formParent = document.getElementById('rFormAppend');
-// if(formParent.hasChildNodes){
-
-//   formParent.addEventListener('change',()=>{
-//   for(let i = 0 ;i<  formParent.length ; i++){
-
-//     console.log(formParent[i]);
-
-
-
-//   }
-//   formParent = document.getElementById('rFormAppend');
-
-// })
   
-// }
-
-
-
-// console.log(formParent);
-// for(let i = 0 ;i<  formParent.length ; i++){
-
-// formParent.addEventListener('click',()=>{
-
-
-// console.log('im parrent');
-
-
-// // })
-
-// }
-
-
-//  let bttn = document.getElementsByClassName("remove")
-            
-           
-
-
-//  for(let i = 0 ;i< bttn.length ; i++){
-
-//     bttn[i].addEventListener('click',()=>{
-
-//      console.log(bttn[i].getAttribute("class"));
+	$('#submit').click(function(){	
+    let size = i;
+    let table = document.getElementById('tbody');
+    let cols  ;
+    let cellData ;
+    let Reimb =new Reimbustment();
+    let iObject
+    
+    //console.log(table)
+    // console.log(table.children);
+    for(let y=1 ; y<=size ; y++ ){
       
-
-//   });
-
-          
-                
-//  }
- 
- 
-$(document).on('click', '.remove', function(){
-  let button_id = $(this).attr("id"); 
-  let button = $(this);
-  console.log(button_id);
- console.log($(button_id).closest('span')) 
- //$(this).closest('span').remove();    
- // console.log($(this).parent);
-  //console.log(button_id)
-  $(this).parent('#formHead'+button_id).remove(); 
-  //let parent = document.getElementById('rFormAppend')
+      cols = table.children[y].children;
    
-    
+          for ( let z = 0 ;z< cols.length ; z++){
+           iObject = new RItem();
+            if (z === 0){
+                let option = cols[z].children[0].value
+                console.log(option)
+                 //let option1 = document.getElementById(`options`).value
+                //  let option2=  document.getElementById(`options${i}`).value
+                
+                // console.log(option1);
+                // console.log(option2);
+                              
+              
+            }else {
 
+              cellData = cols[z].children[0].value ;
+              console.log(cellData);
+              //iObject[z]=cols[z].children[0].value
+
+            }
+             
+              
+          }       
+       Reimb.item.push(iObject);
+    }
+
+   console.log(Reimb);
+	 
+	});
+	
 });
-  
-
-
-
-
-
+let radioClicked;
  
-
-
-
-
-
+// $(document).on('click', '.radios', function(){    
+//   //console.log('clicked');
+//   let button_id = $(this).attr("id"); 
+//   let button = $(this);
+   
+//   type = this.value;
+//   type =type.trim()
+  
+//    radioClicked = type  ;
+  
+   
+//     });

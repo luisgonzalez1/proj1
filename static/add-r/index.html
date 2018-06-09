@@ -16,79 +16,72 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
   <!-- Custom styles for this template -->
-  <link href="navbar.css" rel="stylesheet">
+  <!-- <link href="navbar.css" rel="stylesheet"> -->
 </head>
-
+<!-- onsubmit="event.preventDefault(); -->
 <body>
-  
-<!-- form -->
-<div class='container '> 
-    
-<form class="needs-validation" novalidate> 
-  <div class=rForm>
-  <div class="form-row ">
 
-      <div class="col-md-1 " >
-          <!-- <span class ="remove"><i class="fas fa-minus-circle"></i></span> -->
-      </div>
-      
+     
+         
+    <div class='container '> 
     
-      <div class="col-md-3 " >
-        
-          <!-- <label for="validationCustomTitle">Title</label> -->
-          <div class="input-group">
-                
-            <div class="input-group-prepend">
-                
-              <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
-            </div>
-            <input type="text" class="form-control" id="validationCustomTitle" placeholder="Title" aria-describedby="inputGroupPrepend" required>
-            <div class="invalid-feedback">
-              Please add a Title.
-            </div>
-          </div>
+        <form id ='rItems'class="needs-validation" novalidate onsubmit="event.preventDefault();  "> 
+          <table id='table' class='table table-borderless ' >
+            <tbody id='tbody'>
+              <tr>
+                <td>
+                <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
+              </td>
+            </tr >
+
+              
+              <tr id='row1'>
+
+                  <td>
+
+                    <select id='options'  class="custom-select">
+                      <option value="Lodging">Lodging</option>
+                      <option value="Travel">Travel</option>
+                      <option value="Food">Food</option>
+                      <option value="Other">Other</option>
+                    </select>
+
+                      <!-- <form>
+                      <input type="radio" name="options1" class='radios' id="option1"  value='Lodging' checked > Lodging                  
+                      <input type="radio" name="options1" class ='radios'  id="option2" value='Travel' > Travel                  
+                     <input type="radio" name="options1" class ='radios' id="option3" value='Food' > Food             
+                    <input  type='radio' name="options1" class ='radios' id="option4"  value='Other' > Other
+                  </form> -->
+              
+                  </td>
+              
+              <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
+
+              <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
+
+              <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
+            </tr>
+
+          </tbody> 
+            
+          </table>
+           
+           <button id='submit' class="btn btn-primary"  type="submit">Submit Bundle</button>
+        </form>
         </div>
-        <div class="col-md-3 ">
-            <!-- <label for="validationCustomAmount">Amount</label> -->
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
-              </div>
-              <input type="text" class="form-control" id="validationCustomAmount" placeholder="Amount" aria-describedby="inputGroupPrepend" required>
-              <div class="invalid-feedback">
-                Please enter an amount
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 ">
-              <!-- <label for="validationCustomDescription">Username</label> -->
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
-                </div>
-                <input type="text" class="form-control" id="validationCustomDescription" placeholder="Description" aria-describedby="inputGroupPrepend" required>
-                <div class="invalid-feedback">
-                  Please add a drescription.
-                </div>
-              </div>
-            </div>   
 
-            
-             
-    </div>
-  </div>
-            
-    <div id='rFormAppend'></div>   
-   
-    <i  id ="addR" class="fas fa-plus-circle" ></i>  
-    <br>
-    <br>
-   <button class="btn btn-primary" type="submit">Submit</button>
-</form>
-</div>
- 
- 
-    
+      </div>
+
+
+
+
+
+
+
+
+
+  
+
 
   <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -100,6 +93,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
   <script src="index.js"></script>
+  <script src="add-R.js"></script>
 </body>
 
 </html>
