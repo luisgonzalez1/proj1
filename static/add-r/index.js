@@ -188,9 +188,15 @@ let i=1;
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
       form.addEventListener('submit', function(event) {
+
+        //|| checkEmpty() === false
+        
         if (form.checkValidity() === false) {
+
+            
           event.preventDefault();
           event.stopPropagation();
+          
         }else{
           let size = i;
           let table = document.getElementById('tbody');
@@ -203,28 +209,68 @@ let i=1;
           for(let y=1 ; y<=size ; y++ ){
             
             cols = table.children[y].children;
-         
+            iObject = new RItem();
                 for ( let z = 0 ;z< cols.length ; z++){
-                 iObject = new RItem();
+                
                   if (z === 0){
                       let option = cols[z].children[0].value
-                      console.log(option)
+                      iObject.type=option;
                      
                     
-                  }else {
+                  }else if(z === 1){
       
                     cellData = cols[z].children[0].value ;
-                    console.log(cellData);
+                    iObject.title=cellData
+                     
+      
+                  }else if(z === 2){
+      
+                    cellData = cols[z].children[0].value ;
+                    iObject.amount=cellData
+                     
+      
+                  }if(z === 3){
+      
+                    cellData = cols[z].children[0].value ;
+                    iObject.description=cellData
                      
       
                   }
                    
                     
-                }       
-             Reimb.item.push(iObject);
+                } Reimb.item.push(iObject);      
+              
           }
       
          console.log(Reimb);
+         Reimb.username = 'Ped100';
+
+
+         /*FETCH   */
+
+
+      fetch('http://localhost:3000/r', {
+      body: JSON.stringify(Reimb),
+      headers: {
+        'content-type': 'application/json'
+      },
+      credentials: 'include',
+      method: 'POST'
+    })
+    .then(resp => {
+      if (resp.status === 401 || resp.status === 403) {
+        alert('invalid permissions')
+        throw 'Invalid permissions';
+      }
+      return resp.json();
+    })
+    .then(data => {
+      alert('created') // this is horrible, never use alerts
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  
 
 
 
@@ -246,7 +292,7 @@ let i=1;
       addB.addEventListener('click', function(event) {
 
 
-        ///validate when add is pessed
+        ///validate when add is pressed
 
         if (form.checkValidity() === false) {
             event.preventDefault();
@@ -286,8 +332,8 @@ let i=1;
                     </td> 
                 
                     <td>                    
-                        <input type="text" class="form-control" id="validationCustom03" placeholder="Amount" required>
-                        <div class="invalid-feedback">
+                        <input type="text" id="validationCustom03"  class="form-control" placeholder="Amount" required>
+                        <div id='amount-feedback' class="invalid-feedback">
                           insert valid amount
                         </div>
                       </div>              
@@ -310,6 +356,23 @@ let i=1;
 
       },false)
 
+      //let amountField = document.getElementById('validationCustom03');
+     // amountField.addEventListener('input'
+        $('#validationCustom03').on('input', function(event) {
+
+        console.log('typing information');
+
+
+
+
+
+
+
+
+
+
+      }, false)
+
 
     });
   }, false);
@@ -326,11 +389,17 @@ $(document).on('click', '.btn_remove', function(){
   
 });
 
+// $('#validationCustom03').bind('input', function(event) {
 
+
+// console.log('typing');
+
+
+// })
 
  
 $(document).ready(function(){
-	let i=1;
+//	let i=1;
 	$('#add').click(function(){
 //     i++;
 //     console.log('add pressed')
@@ -438,4 +507,44 @@ $(document).ready(function(){
 });
 let radioClicked;
  
- 
+ function checkEmpty (){
+
+
+  let size = i;
+    let table = document.getElementById('tbody');
+    let cols  ;
+    let cellData ;
+    let Reimb =new Reimbustment();
+    let iObject
+    
+    for(let y=1 ; y<=size ; y++ ){
+            
+      cols = table.children[y].children;
+   
+          for ( let z = 0 ;z< cols.length ; z++){
+           iObject = new RItem();
+            if (z === 0){
+                let option = cols[z].children[0].value
+                console.log(option)
+               
+              
+            }else {
+
+              cellData = cols[z].children[0].value ;
+              if(cellData ===""){
+                return false;
+              }
+               
+
+            }
+             
+              
+          }       
+        
+    }
+
+   
+    
+
+return true;
+ }
