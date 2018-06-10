@@ -1,55 +1,3 @@
-// // import {iObject} from '../../assests/r-Item'
-
-// let rForm = document.getElementsByClassName('rForm');
-// let inner;
-// let bottomForm;
-// let y =0;
-
-// inner= document.createElement('span'); 
-// let btn = document.createElement('span');
-// btn.setAttribute('id',  y ); 
-// btn.setAttribute('class', 'remove' ); 
-// btn.textContent ='X';
-// inner.appendChild(btn);          
-//  inner.setAttribute('id',  'formHead'+y );         
-  
-
-// for (let i = 0 ;i< rForm.length ; i++){             
-//   inner.innerHTML+=rForm[i].innerHTML;     
-  
-// }
-
-// bottomForm = document.getElementById('rFormAppend').appendChild(inner);
-
-// $('#formHead'+y).find('#validationCustomTitle').attr("id", 'validationCustomTitle'+y);
-
-                    
-// $('#formHead'+y).find('#validationCustomAmount').attr("id", 'validationCustomAmount'+y);
-
-                      
-// $('#formHead'+y).find('#validationCustomDescription').attr("id", 'validationCustomDescription'+y);
-
-// y++
-
-// let iObject = new RItem();  
-// let Reimb =new Reimbustment();
-// let firstIt = true;
-
-// $(document).on('click', '.radios', function(){    
-      
-//   let button_id = $(this).attr("id"); 
-//   let button = $(this);
-//   type = this.textContent;
-//   type =type.trim()
-//   //iObject.type=type ;
-   
-//     });
-
- 
-// // iObject.title = document.getElementById('validationCustomTitle').value;
-// // iObject.amount=parseInt(document.getElementById('validationCustomAmount').value);
-// // iObject.description =document.getElementById('validationCustomDescription').value;
-// // Reimb.items.push(iObject);
  
 
 
@@ -279,11 +227,28 @@ $(document).ready(function(){
 
   
     
-    <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
-
-    <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
-
-    <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>
+                <td>                    
+                          <input type="text" class="form-control" id="validationCustom03" placeholder="Title" required>
+                          <div class="invalid-feedback">
+                            insert title
+                          </div>
+                        </div>              
+              </td> 
+          
+              <td>                    
+                  <input type="text" class="form-control" id="validationCustom03" placeholder="Amount" required>
+                  <div class="invalid-feedback">
+                    insert valid amount
+                  </div>
+                </div>              
+            </td> 
+            <td>                    
+                <input type="text" class="form-control" id="validationCustom03" placeholder="Description" required>
+                <div class="invalid-feedback">
+                  insert description 
+                </div>
+              </div>              
+          </td> 
 
     <td><button type="button" name="remove" id=${i} class="btn btn-danger btn_remove">X</button></td>
     
@@ -312,8 +277,7 @@ $(document).ready(function(){
     let Reimb =new Reimbustment();
     let iObject
     
-    //console.log(table)
-    // console.log(table.children);
+    
     for(let y=1 ; y<=size ; y++ ){
       
       cols = table.children[y].children;
@@ -323,18 +287,13 @@ $(document).ready(function(){
             if (z === 0){
                 let option = cols[z].children[0].value
                 console.log(option)
-                 //let option1 = document.getElementById(`options`).value
-                //  let option2=  document.getElementById(`options${i}`).value
-                
-                // console.log(option1);
-                // console.log(option2);
-                              
+               
               
             }else {
 
               cellData = cols[z].children[0].value ;
               console.log(cellData);
-              //iObject[z]=cols[z].children[0].value
+               
 
             }
              
@@ -350,15 +309,4 @@ $(document).ready(function(){
 });
 let radioClicked;
  
-// $(document).on('click', '.radios', function(){    
-//   //console.log('clicked');
-//   let button_id = $(this).attr("id"); 
-//   let button = $(this);
-   
-//   type = this.value;
-//   type =type.trim()
-  
-//    radioClicked = type  ;
-  
-   
-//     });
+ 
