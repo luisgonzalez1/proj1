@@ -178,6 +178,7 @@ function RItem()  {
 //   //     console.log(err);
 //   //   });
 //   // }
+let i=1;
 
 (function() {
   'use strict';
@@ -190,12 +191,140 @@ function RItem()  {
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
+        }else{
+          let size = i;
+          let table = document.getElementById('tbody');
+          let cols  ;
+          let cellData ;
+          let Reimb =new Reimbustment();
+          let iObject
+          
+          
+          for(let y=1 ; y<=size ; y++ ){
+            
+            cols = table.children[y].children;
+         
+                for ( let z = 0 ;z< cols.length ; z++){
+                 iObject = new RItem();
+                  if (z === 0){
+                      let option = cols[z].children[0].value
+                      console.log(option)
+                     
+                    
+                  }else {
+      
+                    cellData = cols[z].children[0].value ;
+                    console.log(cellData);
+                     
+      
+                  }
+                   
+                    
+                }       
+             Reimb.item.push(iObject);
+          }
+      
+         console.log(Reimb);
+
+
+
+
+
+
+
+
+
+
         }
         form.classList.add('was-validated');
+
+         
+        
       }, false);
+      let addB = document.getElementById('add');
+      // let i=1;
+      addB.addEventListener('click', function(event) {
+
+
+        ///validate when add is pessed
+
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }else {
+
+          i++;
+          console.log('add pressed')
+          console.log(i);
+          $('#tbody').append(`
+      
+          
+          <tr id="row${i}">
+      
+         
+       <td>
+      
+           
+                            <select id='options'  class="custom-select">
+                            <option value="Lodging">Lodging</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Food">Food</option>
+                            <option value="Other">Other</option>
+                          </select>
+      
+          </td>
+      
+      
+        
+          
+                      <td>                    
+                                <input type="text" class="form-control" id="validationCustom03" placeholder="Title" required>
+                                <div class="invalid-feedback">
+                                  insert title
+                                </div>
+                              </div>              
+                    </td> 
+                
+                    <td>                    
+                        <input type="text" class="form-control" id="validationCustom03" placeholder="Amount" required>
+                        <div class="invalid-feedback">
+                          insert valid amount
+                        </div>
+                      </div>              
+                  </td> 
+                  <td>                    
+                      <input type="text" class="form-control" id="validationCustom03" placeholder="Description" required>
+                      <div class="invalid-feedback">
+                        insert description 
+                      </div>
+                    </div>              
+                </td> 
+      
+          <td><button type="button" name="remove" id=${i} class="btn btn-danger btn_remove">X</button></td>
+          
+          </tr>
+           
+            `);
+        }
+        form.classList.add('was-validated');
+
+      },false)
+
+
     });
   }, false);
 })();
+
+$(document).on('click', '.btn_remove', function(){
+  console.log('clicked');
+  let button_id = $(this).attr("id"); 
+  
+  $('#row'+button_id).remove();
+
+  i--
+  console.log(i)
+  
+});
 
 
 
@@ -203,106 +332,106 @@ function RItem()  {
 $(document).ready(function(){
 	let i=1;
 	$('#add').click(function(){
-    i++;
-    console.log('add pressed')
-    console.log(i);
-    $('#tbody').append(`
+//     i++;
+//     console.log('add pressed')
+//     console.log(i);
+//     $('#tbody').append(`
 
     
-    <tr id="row${i}">
+//     <tr id="row${i}">
 
    
- <td>
+//  <td>
 
      
-                      <select id='options'  class="custom-select">
-                      <option value="Lodging">Lodging</option>
-                      <option value="Travel">Travel</option>
-                      <option value="Food">Food</option>
-                      <option value="Other">Other</option>
-                    </select>
+//                       <select id='options'  class="custom-select">
+//                       <option value="Lodging">Lodging</option>
+//                       <option value="Travel">Travel</option>
+//                       <option value="Food">Food</option>
+//                       <option value="Other">Other</option>
+//                     </select>
 
-    </td>
+//     </td>
 
 
   
     
-                <td>                    
-                          <input type="text" class="form-control" id="validationCustom03" placeholder="Title" required>
-                          <div class="invalid-feedback">
-                            insert title
-                          </div>
-                        </div>              
-              </td> 
+//                 <td>                    
+//                           <input type="text" class="form-control" id="validationCustom03" placeholder="Title" required>
+//                           <div class="invalid-feedback">
+//                             insert title
+//                           </div>
+//                         </div>              
+//               </td> 
           
-              <td>                    
-                  <input type="text" class="form-control" id="validationCustom03" placeholder="Amount" required>
-                  <div class="invalid-feedback">
-                    insert valid amount
-                  </div>
-                </div>              
-            </td> 
-            <td>                    
-                <input type="text" class="form-control" id="validationCustom03" placeholder="Description" required>
-                <div class="invalid-feedback">
-                  insert description 
-                </div>
-              </div>              
-          </td> 
+//               <td>                    
+//                   <input type="text" class="form-control" id="validationCustom03" placeholder="Amount" required>
+//                   <div class="invalid-feedback">
+//                     insert valid amount
+//                   </div>
+//                 </div>              
+//             </td> 
+//             <td>                    
+//                 <input type="text" class="form-control" id="validationCustom03" placeholder="Description" required>
+//                 <div class="invalid-feedback">
+//                   insert description 
+//                 </div>
+//               </div>              
+//           </td> 
 
-    <td><button type="button" name="remove" id=${i} class="btn btn-danger btn_remove">X</button></td>
+//     <td><button type="button" name="remove" id=${i} class="btn btn-danger btn_remove">X</button></td>
     
-    </tr>
+//     </tr>
      
-      `);
+//       `);
 	});
 	
-	$(document).on('click', '.btn_remove', function(){
-    console.log('clicked');
-    let button_id = $(this).attr("id"); 
+	// $(document).on('click', '.btn_remove', function(){
+  //   console.log('clicked');
+  //   let button_id = $(this).attr("id"); 
     
-    $('#row'+button_id).remove();
+  //   $('#row'+button_id).remove();
 
-    i--
-    console.log(i)
+  //   i--
+  //   console.log(i)
     
-	});
+	// });
   
   
 	$('#submit').click(function(){	
-    let size = i;
-    let table = document.getElementById('tbody');
-    let cols  ;
-    let cellData ;
-    let Reimb =new Reimbustment();
-    let iObject
+  //   let size = i;
+  //   let table = document.getElementById('tbody');
+  //   let cols  ;
+  //   let cellData ;
+  //   let Reimb =new Reimbustment();
+  //   let iObject
     
     
-    for(let y=1 ; y<=size ; y++ ){
+  //   for(let y=1 ; y<=size ; y++ ){
       
-      cols = table.children[y].children;
+  //     cols = table.children[y].children;
    
-          for ( let z = 0 ;z< cols.length ; z++){
-           iObject = new RItem();
-            if (z === 0){
-                let option = cols[z].children[0].value
-                console.log(option)
+  //         for ( let z = 0 ;z< cols.length ; z++){
+  //          iObject = new RItem();
+  //           if (z === 0){
+  //               let option = cols[z].children[0].value
+  //               console.log(option)
                
               
-            }else {
+  //           }else {
 
-              cellData = cols[z].children[0].value ;
-              console.log(cellData);
+  //             cellData = cols[z].children[0].value ;
+  //             console.log(cellData);
                
 
-            }
+  //           }
              
               
-          }       
-       Reimb.item.push(iObject);
-    }
+  //         }       
+  //      Reimb.item.push(iObject);
+  //   }
 
-   console.log(Reimb);
+  //  console.log(Reimb);
 	 
 	});
 	
