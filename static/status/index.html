@@ -59,7 +59,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <a href="../add-r/index.html"><button class="btn btn-primary">Add Reinbustment</button></a>
+        <a href="../add-r/index.html"><button  class="btn btn-primary">Add Reinbustment</button></a>
       </div>
       <div class="col-sm">
         <button class="btn btn-danger" onclick="retreiveMovies()">Fetch</button>
@@ -82,9 +82,15 @@
           </div>
           <div class="col-sm">
             <button class="btn btn-danger" onclick="retreivePending()">Pending</button>
+            <div class="col-sm">
+                <button class="btn btn-danger" onclick="deniedApproveReimburstments()">Approve</button>
+              </div>
           </div>
           
-          
+          <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
           
         </div>
 
@@ -94,7 +100,7 @@
 
     <div class="row">
       <div class="col">
-        <table class="table table-striped table-dark">
+        <table class="table .table-borderless table-striped ">
           <thead>
             <tr>
               <th scope="col">Role</th>
@@ -111,6 +117,11 @@
       </div>
     </div>
   </div>
+
+
+
+
+
 
 
   <!-- Bootstrap core JavaScript
