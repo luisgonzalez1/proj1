@@ -2,6 +2,7 @@ import express from 'express'
 import {Request, Response, NextFunction} from 'express'
 import * as rService from '../services/r-service'
 import {Time} from  '../assests/time'
+import { authMiddleware } from '../security/auth-middleware';
 
 export const rRouter = express.Router();
 let t = new Time();
@@ -78,7 +79,7 @@ status   : 'approved'
 
 ]
 
-
+///////*******need to be worked  */
 
 rRouter.get('',(req:Request,resp:Response)=>{
     console.log('retrieving all reimbuersements');
@@ -87,32 +88,32 @@ rRouter.get('',(req:Request,resp:Response)=>{
 });
 
 
-rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
+// rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
+     
+//     rService.getR(req.params.name,req.params.time)
+//      .then((data)=>{
+//          console.log('data has been retrieved');
+//          //resp.sendStatus(200);
+//          console.log(data)
+//         resp.json(data.Item);
+//      })
+//      .catch((err)=>{
+//         console.log('data not retrieved');
+//         resp.sendStatus(500);
 
-    rService.getR(req.params.name,req.params.time)
-     .then((data)=>{
-         console.log('data has been retrieved');
-         //resp.sendStatus(200);
-         console.log(data)
-        resp.json(data.Item);
-     })
-     .catch((err)=>{
-        console.log('data not retrieved');
-        resp.sendStatus(500);
 
-
-     })
+//      })
 
      
-    });
+//     });
 
      
     
     
-    
+      /////ADDED AUTH ///////    
 
     rRouter.get('/name/:name/:h', (req:Request,resp:Response) =>{
-        
+        authMiddleware('admin,employee'),
         rService.viewHistory(req.params.name)
         
         .then((data)=>{
@@ -209,8 +210,9 @@ rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
         
         });
 
-
+  /////ADDED AUTH ///////    
         rRouter.get('/name/:name/p', (req:Request,resp:Response) =>{
+                authMiddleware('admin'),
                 rService.viewPending(req.params.name)
                     .then((data)=>{
                         
@@ -228,7 +230,10 @@ rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
             
             });
 
+              /////ADDED AUTH ///////    
+
     rRouter.post ('',(req:Request,resp:Response)=>{
+       // authMiddleware('admin', 'employee')
                 let time = t.getCurrentTime();    
             let reimb ={
                 username : req.body.username,
@@ -242,8 +247,9 @@ rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
 
             console.log(reimb);
 
-            
+      
         rService.saveR(reimb)
+        
             .then(()=>{
 
                 console.log('data created');
@@ -264,8 +270,21 @@ rRouter.get('/name/:name/time/:time', (req:Request,resp:Response) =>{
 
 
     
-    rRouter.delete('/name/:name',(req:Request,resp:Response)=>{
-        r =r.filter((p)=>p.userName !== req.params.userName)
-            resp.end();
+    // rRouter.delete('/name/:name',(req:Request,resp:Response)=>{
+    //     r =r.filter((p)=>p.userName !== req.params.userName)
+    //         resp.end();
             
-        });
+    //     });
+
+/////ADDED AUTH ///////
+        rRouter.put('', (req, resp) => {
+            authMiddleware('admin')
+            rService.updateStatus(req.body)
+              .then(data => {
+                resp.json(data);
+              })
+              .catch(err => {
+                console.log(err);
+                resp.sendStatus(500);
+              });
+          });

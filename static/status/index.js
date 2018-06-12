@@ -1,7 +1,29 @@
+function RItem()  {
+
+  this.type='';
+  this.title= '';
+  this.description='';
+  this.amount = '';
+  }
+
+  function Reimbustment (){
+  
+  this.username = 'no user name';
+  this.timeSubmitted=Date.now();
+  this.item=[];
+  this.approver='not approved';
+  this.status='pending';
+
+
+  }
+  
+
+
+
 function retreiveHistory() {
     const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/Ped100/history')
+    fetch('http://localhost:3000/r/name/:name/history')
       .then(resp => {
         console.log(resp.status)
         if(resp.status === 401 || resp.status === 403) {
@@ -39,7 +61,7 @@ function retreiveHistory() {
   function retreivePending() {
     const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/Ped100/pending')
+    fetch('http://localhost:3000/r/name/:name/pending')
       .then(resp => {
         console.log(resp.status)
         if(resp.status === 401 || resp.status === 403) {
@@ -76,7 +98,7 @@ function retreiveHistory() {
   function retreiveAll() {
     const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/Ped100/all')
+    fetch('http://localhost:3000/r/name/:name/all')
       .then(resp => {
         console.log(resp.status)
         if(resp.status === 401 || resp.status === 403) {
@@ -118,7 +140,7 @@ function retreiveHistory() {
 
     const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/Ped100/pending')
+    fetch('http://localhost:3000/r/name/:name/p')
       .then(resp => {
         console.log(resp.status)
         if(resp.status === 401 || resp.status === 403) {
@@ -137,6 +159,7 @@ function retreiveHistory() {
 
         //console.log(emp.role);
         addApprovedDenied(item)
+
 
         });
        // console.log(empData);
@@ -157,15 +180,15 @@ function retreiveHistory() {
 
 
 
-  
-
+  let itemArr = [];
+  let y=0;
   function addApprovedDenied(item){
 
-
+    
     let itemStr;
     for (var key in item) {
       if (key === 'item' ) {
-          console.log(key + " -> " + item[key]);
+          //console.log(key + " -> " + item[key]);
           for(i in item[key]){          
 
              itemStr =`Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , 
@@ -176,11 +199,15 @@ function retreiveHistory() {
         }
       }
     // body.innerHTML +=
-   console.log(itemStr);
+   //console.log(itemStr);
     let t =new Date(item.timeSubmitted).toLocaleTimeString("en-US");
     let d =new Date(item.timeSubmitted).toLocaleDateString("en-US");
     dateStr =  `${d} ${t}`;
     
+    if ($('#form-header').text() === "" ){
+      $('#form-header').append (`<form id ='rItems'class="needs-validation" onsubmit="event.preventDefault();  ">` )
+      }
+
     $('#movie-table-body').append(`
     <tr>
 
@@ -190,22 +217,125 @@ function retreiveHistory() {
       <td>${item.approver}</td>    
       <td>${itemStr}</td>
       <td>
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="options" id="option1" autocomplete="off" checked> Approve
+      <div id='approveDenied${y}' class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label  class="btn btn-secondary active" >
+        <input type="radio" name="options" id="option1" autocomplete="off" checked value='approved'> Approved
       </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option2" autocomplete="off"> Deny
+      <label class="btn btn-secondary" >
+        <input type="radio" name="options" id="option2" autocomplete="off" value='denied'> Denied
       </label>
-      </div>
+      <label class="btn btn-secondary" >
+        <input type="radio" name="options" id="option2" autocomplete="off" value='pending'> Leave Pending
+      </label>
+      
+    </div>
       </td>
       
 
     </tr>
   `);
+ 
+    
+  if ($('#sumit-status').text() === "" ){
+    $('#sumit-status').append (`<button id='submit' class="btn btn-primary"  type="submit">Submit Bundle</button> ` )
   }
 
+ itemArr.push(item);
+  y++;
+     
+  // if ($('#form-footer').text() === "" ){
+  //    $('#form-footer').append (`</form>` )
+  //     }
+   
+  
 
+
+  // let approvedDenied = $('#approveDenied label.active input').val();
+  // //console.log(approvedDenied);
+  
+  // $(document).on('change', ('#approveDenied label.active input', function(){
+  //     console.log('changed');
+     
+  //     // $('#answer').append =`<span>${approvedDenied}</span>`;
+  //   }));
+   
+
+ 
+  
+
+// item.status = " testing ";
+// item.approver = "approver tester "
+
+//console.log(item);
+ 
+  }
+
+  // let approvedDenied;
+  // $(document).on('change', ('#approveDenied label.active input', function(){
+  //   approvedDenied = $('#approveDenied label.active input').val();
+  //   console.log(approvedDenied)
+    
+  // item.status = " testing ";
+  // item.approver = "approver tester "
+
+
+// }));
+
+    
+
+  function updateStatus(){
+    
+    let size = document.getElementById('movie-table-body').childElementCount;
+    for ( let i =0 ; i<size ; i++ ){
+     // console.log(itemArr)
+    approvedDenied = $(`#approveDenied${i} label.active input`).val();
+    //console.log(approvedDenied);
+      //console.log(`Status before ${itemArr[i].status}`)
+      itemArr[i].status =  approvedDenied;
+      console.log(` timeSubmitted : itemArr[i].timeSubmitted`)
+      //itemArr[i].timeSubmitted = Date.now();
+      itemArr[i].approver = "Sas07"
+      console.log(`Status after ${itemArr[i].status}`)
+      fetch('http://localhost:3000/r/', {
+      body: JSON.stringify( itemArr[i]),
+      headers: {
+        'content-type': 'application/json'
+      },
+     //credentials: 'include',
+    
+       
+      method: 'PUT'
+    })
+    .then(resp => {
+      console.log(resp.status)
+      // if (resp.status === 401) {
+      //   throw 'invalid ';
+      // }
+      if (resp.status === 200) {
+        return resp.json();
+        console.log('updated data')
+      }
+      throw 'unable to update data ';
+    })
+    .then(data => {
+      window.location = '../status/index.html';
+    })
+    .catch(err => {
+      console.log(err);
+      document.getElementById('error-message').innerText = err;
+    })
+  
+  
+      // console.log(itemArr[0].status);
+
+
+
+
+
+    }
+
+    
+  }
 
 
 

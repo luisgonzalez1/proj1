@@ -243,7 +243,7 @@ let i=1;
           }
       
          console.log(Reimb);
-         Reimb.username = 'Ped100';
+        // Reimb.username = 'Ped100';
 
 
          /*FETCH   */
@@ -270,18 +270,7 @@ let i=1;
     .catch(err => {
       console.log(err);
     });
-  
-
-
-
-
-
-
-
-
-
-
-        }
+          }
         form.classList.add('was-validated');
 
          
@@ -378,6 +367,16 @@ let i=1;
   }, false);
 })();
 
+$(document).on('click', '.btn_remove', function(){
+  console.log('clicked');
+  let button_id = $(this).attr("id"); 
+  
+  $('#row'+button_id).remove();
+
+  i--
+  console.log(i)
+  
+});
 $(document).on('click', '.btn_remove', function(){
   console.log('clicked');
   let button_id = $(this).attr("id"); 
@@ -548,3 +547,5 @@ let radioClicked;
 
 return true;
  }
+
+ 

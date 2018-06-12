@@ -77,3 +77,32 @@ export function viewHistory(username:string):Promise<any>{
 
 
 }// end view pending
+
+
+
+export function updateStatus(r): Promise<any> {
+  return docClient.update({
+    TableName: 'reimburstments2',
+    
+    Key: {
+      username: r.username,
+      timeSubmitted: r.timeSubmitted
+    },
+    //#appr=:a
+    //#time =:t
+    UpdateExpression: 'set #stat=:s ,#appr=:a ',
+    ExpressionAttributeNames: {
+       
+      '#stat': 'status',
+      '#appr' : 'approver',
+      // '#time' : 'timeSubmitted'
+    },
+    ExpressionAttributeValues:{
+      ':s': r.status,
+      ':a': r.approver,
+      // ':t': r.timeSubmitted
+       
+    },
+    ReturnValues: 'UPDATED_NEW'
+  }).promise();
+}

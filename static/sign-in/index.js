@@ -27,7 +27,7 @@ function login() {
       throw 'Unable to login at this time, please try again later';
     })
     .then(data => {
-      window.location = '../employee-table/index.html';
+      window.location = '../status/index.html';
     })
     .catch(err => {
       console.log(err);

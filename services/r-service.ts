@@ -26,5 +26,10 @@ export function viewHistory(username :string){
 
 }
 
+export function updateStatus(r){
+
+    return rDao.updateStatus(r);
+
+}
 
  

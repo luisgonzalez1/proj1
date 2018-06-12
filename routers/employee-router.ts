@@ -145,14 +145,14 @@ employeeRouter.get('/name/:name', (req:Request,resp:Response) =>{
                          //data.Item reffers to the actual object body
                          console.log(data);
 
-                         if (req.body.username === 'admin' && req.body.password === 'admin') {
-                            req.session.role = 'admin';
+                         if (req.body.username === data.Items[0].username && req.body.password === data.Items[0].password) {
+                            req.session.role = data.Items[0].role;
                             resp.json({
-                              username: 'admin',
-                              role: 'admin'});
+                              username: data.Items[0].password,
+                              role: data.Items[0].role});
 
                           } else if (req.body.username === data.Items[0].username && req.body.password === data.Items[0].password) {
-                            req.session.role = 'employee';
+                            req.session.role = data.Items[0].role;
                             console.log('logged sucessfully');
                             resp.json({
                               username: data.Items[0].username,
