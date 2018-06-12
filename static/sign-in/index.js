@@ -2,7 +2,9 @@
 function login() {
     const username = document.getElementById('inputUsername').value;
     const password = document.getElementById('inputPassword').value;
-  
+    //sessionStorage.setItem('key', 'username');
+    //username = sessionStorage.getItem('key')
+    // console.log(username);
     const credential = {username, password}; // this will create an object like {username: 'blake', password: 'pass'} based on the values in those variables
   
     fetch('http://localhost:3000/employee/login', {
@@ -27,6 +29,12 @@ function login() {
       throw 'Unable to login at this time, please try again later';
     })
     .then(data => {
+      //.Items[0]
+     // data.Items[0].username
+     localStorage.setItem('username',username);
+      
+      
+
       window.location = '../status/index.html';
     })
     .catch(err => {

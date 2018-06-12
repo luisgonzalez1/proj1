@@ -8,22 +8,67 @@ function RItem()  {
 
   function Reimbustment (){
   
-  this.username = 'no user name';
+  this.username = username;
   this.timeSubmitted=Date.now();
   this.item=[];
-  this.approver='not approved';
+  this.approver=username;
   this.status='pending';
 
 
   }
   
+  let username = localStorage.username;
+  
+  console.log(`user passes by session storage ${username}`);
 
 
+
+
+
+  function deniedApproveReimburstments(item){
+
+    //const year = document.getElementById('year-input').value;
+    //, {credentials: 'include'}
+    fetch(`http://localhost:3000/r/name/${username}/p`, {credentials: 'include'})
+      .then(resp => {
+        console.log(resp.status)
+        if(resp.status === 401 || resp.status === 403) {
+          return;
+        }        
+        return resp.json();
+      })
+      .then((historyData) => {
+  
+        // clear table;
+        const body = document.getElementById('movie-table-body');
+        body.innerHTML = '';
+        
+        // populate the table for each movie
+        historyData.forEach((item)=>{
+
+        //console.log(emp.role);
+        addApprovedDenied(item)
+
+
+        });
+       // console.log(empData);
+
+      })
+      .catch(err => {
+         console.log(err);
+        // const body = document.getElementById('movie-table-body');
+        // body.innerText = 'Unable to retreive data';
+         
+
+
+      });
+  }
 
 function retreiveHistory() {
-    const year = document.getElementById('year-input').value;
+   // const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/:name/history')
+   
+    fetch(`http://localhost:3000/r/name/${username}/history`, {credentials: 'include'})
       .then(resp => {
         console.log(resp.status)
         if(resp.status === 401 || resp.status === 403) {
@@ -61,7 +106,7 @@ function retreiveHistory() {
   function retreivePending() {
     const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/:name/pending')
+    fetch(`http://localhost:3000/r/name/${username}/pending`, {credentials: 'include'})
       .then(resp => {
         console.log(resp.status)
         if(resp.status === 401 || resp.status === 403) {
@@ -98,7 +143,7 @@ function retreiveHistory() {
   function retreiveAll() {
     const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/:name/all')
+    fetch(`http://localhost:3000/r/name/${username}/all`, {credentials: 'include'})
       .then(resp => {
         console.log(resp.status)
         if(resp.status === 401 || resp.status === 403) {
@@ -136,44 +181,7 @@ function retreiveHistory() {
 
 
 
-  function deniedApproveReimburstments(item){
-
-    const year = document.getElementById('year-input').value;
-    //, {credentials: 'include'}
-    fetch('http://localhost:3000/r/name/:name/p')
-      .then(resp => {
-        console.log(resp.status)
-        if(resp.status === 401 || resp.status === 403) {
-          return;
-        }        
-        return resp.json();
-      })
-      .then((historyData) => {
   
-        // clear table;
-        const body = document.getElementById('movie-table-body');
-        body.innerHTML = '';
-        
-        // populate the table for each movie
-        historyData.forEach((item)=>{
-
-        //console.log(emp.role);
-        addApprovedDenied(item)
-
-
-        });
-       // console.log(empData);
-
-      })
-      .catch(err => {
-         console.log(err);
-        // const body = document.getElementById('movie-table-body');
-        // body.innerText = 'Unable to retreive data';
-         
-
-
-      });
-  }
 
 
 
@@ -191,9 +199,12 @@ function retreiveHistory() {
           //console.log(key + " -> " + item[key]);
           for(i in item[key]){          
 
-             itemStr =`Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , 
-
-           Description : ${ item[key][i].description} ,Type : ${  item[key][i].type}`
+            $('#moda-body').append (` <tr><td>Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type}</td></tr>` )
+            //  itemStr +=`
+             
+            //  Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type}
+             
+             
            //data.innerText =itemStr
           }
         }
@@ -204,9 +215,9 @@ function retreiveHistory() {
     let d =new Date(item.timeSubmitted).toLocaleDateString("en-US");
     dateStr =  `${d} ${t}`;
     
-    if ($('#form-header').text() === "" ){
-      $('#form-header').append (`<form id ='rItems'class="needs-validation" onsubmit="event.preventDefault();  ">` )
-      }
+    // if ($('#form-header').text() === "" ){
+    //   $('#form-header').append (`<form id ='rItems'class="needs-validation" onsubmit="event.preventDefault();  ">` )
+    //   }
 
     $('#movie-table-body').append(`
     <tr>
@@ -215,20 +226,26 @@ function retreiveHistory() {
       <td>${dateStr}</td>
       <td>${item.status}</td>           
       <td>${item.approver}</td>    
-      <td>${itemStr}</td>
+      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Items
+    </button></td>
       <td>
+         
+        
+   
       <div id='approveDenied${y}' class="btn-group btn-group-toggle" data-toggle="buttons">
       <label  class="btn btn-secondary active" >
-        <input type="radio" name="options" id="option1" autocomplete="off" checked value='approved'> Approved
+        <input type="radio" name="options" id="option1" autocomplete="off" checked value='pending'>Pending
       </label>
       <label class="btn btn-secondary" >
-        <input type="radio" name="options" id="option2" autocomplete="off" value='denied'> Denied
+        <input type="radio" name="options" id="option2" autocomplete="off" value='denied'>Approve
       </label>
       <label class="btn btn-secondary" >
-        <input type="radio" name="options" id="option2" autocomplete="off" value='pending'> Leave Pending
+        <input type="radio" name="options" id="option2" autocomplete="off" value='approved'>Deny
       </label>
       
     </div>
+    
       </td>
       
 
@@ -243,6 +260,33 @@ function retreiveHistory() {
  itemArr.push(item);
   y++;
      
+
+  $('#Modal').append(` <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <table>
+          <tbody id= "moda-body">
+             
+             
+          <tbody>
+        </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> `)
+
   // if ($('#form-footer').text() === "" ){
   //    $('#form-footer').append (`</form>` )
   //     }
@@ -281,6 +325,8 @@ function retreiveHistory() {
 
 // }));
 
+
+
     
 
   function updateStatus(){
@@ -294,14 +340,14 @@ function retreiveHistory() {
       itemArr[i].status =  approvedDenied;
       console.log(` timeSubmitted : itemArr[i].timeSubmitted`)
       //itemArr[i].timeSubmitted = Date.now();
-      itemArr[i].approver = "Sas07"
+      itemArr[i].approver = username;
       console.log(`Status after ${itemArr[i].status}`)
       fetch('http://localhost:3000/r/', {
       body: JSON.stringify( itemArr[i]),
       headers: {
         'content-type': 'application/json'
       },
-     //credentials: 'include',
+     credentials: 'include',
     
        
       method: 'PUT'
@@ -408,13 +454,32 @@ function retreiveHistory() {
       <td>${item.username}</td>
       <td>${dateStr}</td>
       <td>${item.status}</td>           
-      <td>${item.approver}</td>    
-      <td>${itemStr}</td>
+      <td>${item.approver}</td> 
+      <td> 
+       
+      <button >
+      Launch demo modal
+      /button>
+    </td>
       
       
 
     </tr>
+
+
+
+
+   
+
+
+
+
+
   `);
      
 
   }
+
+ 
+
+ 

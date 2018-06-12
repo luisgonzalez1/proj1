@@ -106,14 +106,32 @@ rRouter.get('',(req:Request,resp:Response)=>{
 
      
 //     });
+/////ADDED AUTH ///////    
+rRouter.get('/name/:name/p', (req:Request,resp:Response) =>{
+    authMiddleware('admin'),
+      rService.viewPending(req.params.name)
+          .then((data)=>{
+              
+              console.log('data retrieved');
+              resp.json(data.Items);
 
+          })
+          .catch((err)=>{
+              console.log(err);
+          console.log('data not retrieved')
+          resp.sendStatus(500);
+
+          })                    
+  
+  
+  });
      
     
     
       /////ADDED AUTH ///////    
 
     rRouter.get('/name/:name/:h', (req:Request,resp:Response) =>{
-        authMiddleware('admin,employee'),
+       authMiddleware('admin,employee'),
         rService.viewHistory(req.params.name)
         
         .then((data)=>{
@@ -210,30 +228,12 @@ rRouter.get('',(req:Request,resp:Response)=>{
         
         });
 
-  /////ADDED AUTH ///////    
-        rRouter.get('/name/:name/p', (req:Request,resp:Response) =>{
-                authMiddleware('admin'),
-                rService.viewPending(req.params.name)
-                    .then((data)=>{
-                        
-                        console.log('data retrieved');
-                        resp.json(data.Items);
-
-                    })
-                    .catch((err)=>{
-                        console.log(err);
-                    console.log('data not retrieved')
-                    resp.sendStatus(500);
-
-                    })                    
-            
-            
-            });
+  
 
               /////ADDED AUTH ///////    
 
     rRouter.post ('',(req:Request,resp:Response)=>{
-       // authMiddleware('admin', 'employee')
+        authMiddleware('admin', 'employee')
                 let time = t.getCurrentTime();    
             let reimb ={
                 username : req.body.username,
@@ -278,7 +278,7 @@ rRouter.get('',(req:Request,resp:Response)=>{
 
 /////ADDED AUTH ///////
         rRouter.put('', (req, resp) => {
-            authMiddleware('admin')
+            authMiddleware('admin'),
             rService.updateStatus(req.body)
               .then(data => {
                 resp.json(data);
