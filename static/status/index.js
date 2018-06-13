@@ -192,22 +192,76 @@ function retreiveHistory() {
   let y=0;
   function addApprovedDenied(item){
 
+
+//  $('#Modal').append(` <!-- Modal -->
+//     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+//       <div class="modal-dialog" role="document">
+//         <div class="modal-content">
+//           <div class="modal-header">
+//             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+//             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//               <span aria-hidden="true">&times;</span>
+//             </button>
+//           </div>
+//           <div class="modal-body">
+//           <table>
+//             <tbody id= "moda-body">
+               
+               
+//             <tbody>
+//           </table>
+//           </div>
+//           <div class="modal-footer">
+//             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+//           </div>
+//         </div>
+//       </div>
+//     </div> `)
+
+   
+
+
+
+   
     
-    let itemStr;
+    let itemStr="";
     for (var key in item) {
       if (key === 'item' ) {
           //console.log(key + " -> " + item[key]);
-          for(i in item[key]){          
+          for(i in item[key]){   
+            
+            //itemStr.push(`Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type} `)
+            //` <tr><td>Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type}</td></tr>` 
 
-            $('#moda-body').append (` <tr><td>Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type}</td></tr>` )
-            //  itemStr +=`
+             //$(`#cBody`).append (` <tr><td>   Title : ${ item[key][i].title} , Amount : ${ item[key][i].amount} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type}</td></tr>` )
+             itemStr += ` 
+            
              
-            //  Title : ${ item[key][i].title} , Amount : ${ item[key][i].title} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type}
+            
+            <tr>
+            <td>${item[key][i].title}</td>
+            <td> ${item[key][i].amount}</td> 
+            <td> ${item[key][i].description}</td> 
+            <td>  ${item[key][i].type}</td>
+
              
+             </tr>
+              
+             
+             ` 
+             
+             
+             
+             
+             //Title : ${ item[key][i].title} , Amount : ${ item[key][i].amount} , Description : ${ item[key][i].description} ,Type : ${  item[key][i].type} 
+             //<br>
              
            //data.innerText =itemStr
           }
+         
         }
+       
       }
     // body.innerHTML +=
    //console.log(itemStr);
@@ -218,79 +272,108 @@ function retreiveHistory() {
     // if ($('#form-header').text() === "" ){
     //   $('#form-header').append (`<form id ='rItems'class="needs-validation" onsubmit="event.preventDefault();  ">` )
     //   }
+  //   <td><button id =Mbotton${y} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  //   Items
+  // </button></td>
+  //   <td>
+
+    //$(`#moda-body`).append(`${itemStr}`)
 
     $('#movie-table-body').append(`
-    <tr>
+
+    <tr class ='table-primary'>
+        <th scope="col">Username</th>
+        <th scope="col">Time Submitted</th>
+        <th scope="col">Staus</th>
+        <th scope="col">Approved by</th>
+    </tr>
+
+    <tr class='table-info'>
 
       <td>${item.username}</td>
       <td>${dateStr}</td>
       <td>${item.status}</td>           
-      <td>${item.approver}</td>    
-      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Items
-    </button></td>
-      <td>
+      <td>${item.approver}</td>  
+     
+    <tr class='table-active'>
+      <th scope="col">Title</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Description</th>
+      <th scope="col">Type</th>
+     </tr>
+       ${itemStr}
+       
+       
+
+     
+      
+       
+      
+    
          
         
-   
+      <td>
       <div id='approveDenied${y}' class="btn-group btn-group-toggle" data-toggle="buttons">
       <label  class="btn btn-secondary active" >
-        <input type="radio" name="options" id="option1" autocomplete="off" checked value='pending'>Pending
+        <input class='blue' type="radio" name="options" id="option1" autocomplete="off" checked value='pending'>Pending
       </label>
       <label class="btn btn-secondary" >
-        <input type="radio" name="options" id="option2" autocomplete="off" value='denied'>Approve
+        <input class='green'type="radio" name="options" id="option2" autocomplete="off" value='denied'>Approve
       </label>
       <label class="btn btn-secondary" >
-        <input type="radio" name="options" id="option2" autocomplete="off" value='approved'>Deny
+        <input class='red' type="radio" name="options" id="option2" autocomplete="off" value='approved'>Deny
       </label>
       
     </div>
     
       </td>
-      
 
-    </tr>
+      </tr>
+
+     
   `);
  
     
   if ($('#sumit-status').text() === "" ){
-    $('#sumit-status').append (`<button id='submit' class="btn btn-primary"  type="submit">Submit Bundle</button> ` )
+    $('#sumit-status').append (`<button id='submit' class="btn btn-primary"  type="submit">Submit</button> ` )
   }
 
- itemArr.push(item);
-  y++;
-     
+  itemArr.push(item);
+  
+  
 
-  $('#Modal').append(` <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        <table>
-          <tbody id= "moda-body">
-             
-             
-          <tbody>
-        </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> `)
+  // $('#Modal').append(` <!-- Modal -->
+  //   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  //     <div class="modal-dialog" role="document">
+  //       <div class="modal-content">
+  //         <div class="modal-header">
+  //           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+  //           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  //             <span aria-hidden="true">&times;</span>
+  //           </button>
+  //         </div>
+  //         <div class="modal-body">
+  //         <table>
+  //           <tbody id= "moda-body">
+               
+               
+  //           <tbody>
+  //         </table>
+  //         </div>
+  //         <div class="modal-footer">
+  //           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div> `)
+
 
   // if ($('#form-footer').text() === "" ){
   //    $('#form-footer').append (`</form>` )
   //     }
-   
+  
+  y++;
   
 
 
@@ -325,7 +408,10 @@ function retreiveHistory() {
 
 // }));
 
-
+// $("#option1").click(function(){
+//   $("#option2").removeClass("active");
+//   $(this).addClass("active");
+// });
 
     
 

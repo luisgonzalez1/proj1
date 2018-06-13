@@ -32,6 +32,7 @@ function login() {
       //.Items[0]
      // data.Items[0].username
      localStorage.setItem('username',username);
+     console.log(data)
       
       
 

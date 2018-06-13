@@ -131,7 +131,7 @@ rRouter.get('/name/:name/p', (req:Request,resp:Response) =>{
       /////ADDED AUTH ///////    
 
     rRouter.get('/name/:name/:h', (req:Request,resp:Response) =>{
-       authMiddleware('admin,employee'),
+       authMiddleware('admin','employee'),
         rService.viewHistory(req.params.name)
         
         .then((data)=>{
