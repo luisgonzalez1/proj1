@@ -215,17 +215,23 @@ let i=1;
   }, false);
 })();
 
-
+////DELETE
 $(document).on('click', '.btn_remove', function(){
   console.log('clicked');
   let button_id = $(this).attr("id"); 
   
-  $('#row'+button_id).remove();
+  $('#row'+button_id).fadeOut(500,()=>{
 
-  i--
+    $('#row'+button_id).remove();
+    i--
+  })
+
+  
   console.log(i)
   
 });
+
+ 
 
 // $('#validationCustom03').bind('input', function(event) {
 

@@ -42,6 +42,15 @@ function RItem()  {
         // clear table;
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
+
+        $('#movie-table-body').append(`
+
+        <tr class ='table-primary'>
+         <th scope="col">Username</th>
+         <th scope="col">Time Submitted</th>
+         <th scope="col">Staus</th>
+         <th scope="col">Approved by</th>
+       </tr>`)
         
         // populate the table for each movie
         historyData.forEach((item)=>{
@@ -81,6 +90,15 @@ function retreiveHistory() {
         // clear table;
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
+
+        $('#movie-table-body').append(`
+
+        <tr class ='table-primary'>
+         <th scope="col">Username</th>
+         <th scope="col">Time Submitted</th>
+         <th scope="col">Staus</th>
+         <th scope="col">Approved by</th>
+       </tr>`)
         
         // populate the table for each movie
         historyData.forEach((item)=>{
@@ -119,6 +137,16 @@ function retreiveHistory() {
         // clear table;
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
+
+        $('#movie-table-body').append(`
+
+        <tr class ='table-primary'>
+         <th scope="col">Username</th>
+         <th scope="col">Time Submitted</th>
+         <th scope="col">Staus</th>
+         <th scope="col">Approved by</th>
+       </tr>`)
+        
         
         // populate the table for each movie
         historyData.forEach((item)=>{
@@ -156,6 +184,15 @@ function retreiveHistory() {
         // clear table;
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
+
+        $('#movie-table-body').append(`
+
+        <tr class ='table-primary'>
+         <th scope="col">Username</th>
+         <th scope="col">Time Submitted</th>
+         <th scope="col">Staus</th>
+         <th scope="col">Approved by</th>
+       </tr>`)
         
         // populate the table for each movie
         historyData.forEach((item)=>{
@@ -535,6 +572,10 @@ function retreiveHistory() {
     dateStr =  `${d} ${t}`;
     
     $('#movie-table-body').append(`
+
+   
+
+
     <tr>
 
       <td>${item.username}</td>
@@ -542,14 +583,6 @@ function retreiveHistory() {
       <td>${item.status}</td>           
       <td>${item.approver}</td> 
       <td> 
-       
-      <button >
-      Launch demo modal
-      /button>
-    </td>
-      
-      
-
     </tr>
 
 
