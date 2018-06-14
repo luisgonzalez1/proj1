@@ -92,3 +92,21 @@ display:none;
 
 
 } 
+
+.scrollable{
+
+
+height: 500px;
+overflow: scroll
+
+
+}
+
+/* #submit1{
+
+display:none;
+
+
+
+
+} */

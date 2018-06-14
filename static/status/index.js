@@ -22,10 +22,14 @@ function RItem()  {
   console.log(`user passes by session storage ${username}`);
 
 
-
+  // window.onload = function() {
+  //   $('#sumit-status').css({'display':'none'})
+  // };
 
 
   function deniedApproveReimburstments(item){
+
+
 
     //const year = document.getElementById('year-input').value;
     //, {credentials: 'include'}
@@ -43,14 +47,7 @@ function RItem()  {
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
 
-        $('#movie-table-body').append(`
-
-        <tr class ='table-primary'>
-         <th scope="col">Username</th>
-         <th scope="col">Time Submitted</th>
-         <th scope="col">Staus</th>
-         <th scope="col">Approved by</th>
-       </tr>`)
+        tableHeader()
         
         // populate the table for each movie
         historyData.forEach((item)=>{
@@ -91,14 +88,7 @@ function retreiveHistory() {
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
 
-        $('#movie-table-body').append(`
-
-        <tr class ='table-primary'>
-         <th scope="col">Username</th>
-         <th scope="col">Time Submitted</th>
-         <th scope="col">Staus</th>
-         <th scope="col">Approved by</th>
-       </tr>`)
+        tableHeader()
         
         // populate the table for each movie
         historyData.forEach((item)=>{
@@ -139,14 +129,7 @@ function retreiveHistory() {
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
 
-        $('#movie-table-body').append(`
-
-        <tr class ='table-primary'>
-         <th scope="col">Username</th>
-         <th scope="col">Time Submitted</th>
-         <th scope="col">Staus</th>
-         <th scope="col">Approved by</th>
-       </tr>`)
+        tableHeader();
         
         
         // populate the table for each movie
@@ -185,15 +168,7 @@ function retreiveHistory() {
         // clear table;
         const body = document.getElementById('movie-table-body');
         body.innerHTML = '';
-        $('#movie-table-body').append(`
-   
-        <tr class ='table-primary'>
-         <th scope="col">Username</th>
-         <th scope="col">Time Submitted</th>
-         <th scope="col">Staus</th>
-         <th scope="col">Approved by</th>
-       </tr>`)
-
+        tableHeader();
      
         
         // populate the table for each movie
@@ -231,8 +206,8 @@ function retreiveHistory() {
   let y=0;
   function addApprovedDenied(item){
 
-   
-    
+    //$('#submit1').css({'display':'block'})
+    let size= 0;
     let itemStr="";
     for (var key in item) {
       if (key === 'item' ) {
@@ -253,7 +228,7 @@ function retreiveHistory() {
            
              
              ` )   
-             
+             size++;
               
           }
          
@@ -274,7 +249,8 @@ function retreiveHistory() {
 
       <td>${item.username}</td>
       <td>${dateStr}</td>
-      <td>${item.status}</td>           
+      <td>${item.status}</td>    
+      <td>${size}</td>   
       <td>${item.approver}</td>  
     </tr>
      
@@ -344,7 +320,7 @@ function retreiveHistory() {
     for ( let i =0 ; i<size ; i++ ){
      // console.log(itemArr)
     approvedDenied = $(`#approveDenied${i} label.active input`).val();
-    //console.log(approvedDenied);
+    console.log(approvedDenied);
       //console.log(`Status before ${itemArr[i].status}`)
       itemArr[i].status =  approvedDenied;
       console.log(` timeSubmitted : itemArr[i].timeSubmitted`)
@@ -423,14 +399,7 @@ function retreiveHistory() {
            const body = document.getElementById('movie-table-body');
            body.innerHTML = '';
    
-           $('#movie-table-body').append(`
-   
-           <tr class ='table-primary'>
-            <th scope="col">Username</th>
-            <th scope="col">Time Submitted</th>
-            <th scope="col">Staus</th>
-            <th scope="col">Approved by</th>
-          </tr>`)
+            tableHeader()
            
            // populate the table for each movie
            historyData.forEach((item)=>{
@@ -440,7 +409,7 @@ function retreiveHistory() {
    
            });
           // console.log(empData);
-   
+           
          })
          .catch(err => {
             console.log(err);
@@ -457,7 +426,8 @@ function retreiveHistory() {
 
 
      function addRItem(item){
-
+      
+      //$('#sumit-status').css({'display':'none'})
    
       let size= 0;
       let itemStr="";
@@ -527,7 +497,9 @@ function retreiveHistory() {
    
   
     
-      
+    if ($('#sumit-status').text() !== "" ){
+      $('#sumit-status').empty().append (`<button id='submit' class="btn btn-primary"  type="submit">Submit</button> ` )
+    }
     
   
     itemArr.push(item);
@@ -536,3 +508,28 @@ function retreiveHistory() {
   
     }
   
+
+    function tableHeader(){
+
+       
+
+
+      $('#movie-table-body').append(`
+
+      
+   
+      <tr class ='table-primary'>
+       <th scope="col">Username</th>
+       <th scope="col">Time Submitted</th>
+       <th scope="col">Staus</th>
+       <th scope="col">Items</th>
+       <th scope="col">Last Reviewed by</th>
+     </tr>`)
+
+
+
+
+    }
+
+
+    

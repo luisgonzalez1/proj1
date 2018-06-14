@@ -16,6 +16,7 @@
 
   <!-- Custom styles for this template -->
   <link href="navbar.css" rel="stylesheet">
+  <link rel="stylesheet" href="../add-r/index.css">
 </head>
 
 <body >
@@ -56,96 +57,7 @@
   </nav>
 
   
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm">
-        <a href="../add-r/index.html"><button  class="btn btn-primary">Add Reinbustment</button></a>
-      </div>
-      <div class="col-sm">
-        <button class="btn btn-danger" onclick="retreiveMovies()">Fetch</button>
-      </div>
-      <div class="col-sm">
-        year: <input id="year-input" type="number" placeholder="2018" />
-      </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <a href="../add-r/index.html"><button class="btn btn-primary">Add Reinbursments </button></a>
-          </div>
-          <div class="col-sm">
-            <button class="btn btn-danger" onclick="retreiveHistory()">History</button>
-          </div>
-          <div class="col-sm">
-            <button class="btn btn-danger" onclick="retreiveAll()">All</button>
-          </div>
-          <div class="col-sm">
-            <button class="btn btn-danger" onclick="retreivePending()">Pending</button>
-            <div class="col-sm">
-                <button class="btn btn-danger" onclick="deniedApproveReimburstments()">Approve</button>
-              </div>
-          </div>
-          <div class="col-sm">
-            <button class="btn btn-danger" onclick="retreiveAllR()">All Reinburstments</button>
-          </div>
-      </div>
-      <div class="col-sm">
-        <button class="btn btn-danger" onclick="retreiveAllPending()">All Pending </button>
-      </div>
-  </div>
-  <div class="col-sm">
-    <button class="btn btn-danger" onclick="retreiveAllApproved()">All Approved</button>
-  </div>
-</div>
-<div class="col-sm">
-  <button class="btn btn-danger" onclick="retreiveAllDenied()">All Denied</button>
-</div>
-</div>
-
-<div class="col-sm">
-  <button class="btn btn-danger" onclick="retreiveAllHistory()">History</button>
-</div>
-</div>
-          
-      
  
-          
-        </div>
-
-
-        
- 
-
-
-      <div class='container'>
-        <!-- <span id ='form-header'></span> -->
-         <form id ='rItems'class="needs-validation" onsubmit="event.preventDefault(); updateStatus();  ">
-    <div class="row">
-      <div class="col">
-        <table class="table .table-borderless table table-hover ">
-          <thead>
-            
-          </thead>
-          <tbody id="movie-table-body">
-            <tr>
-               
-            </tr>
-            <tr>
-          </tbody>
-
-          
-        </table>
-        <span id ='sumit-status'></span>
-      </form>
-        <!-- <span id ='form-footer'></span> -->
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 
 
@@ -162,6 +74,7 @@
     crossorigin="anonymous"></script>
   <script src="index.js"></script>
   <script src="../r-table/index.js"></script>
+  <script src="../add-r/index.js"></script>
 </body>
 
 </html>
