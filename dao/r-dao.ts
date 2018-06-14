@@ -12,6 +12,18 @@ aws.config.update(awsConfig);
 const dynamodb = new aws.DynamoDB();
 const docClient = new aws.DynamoDB.DocumentClient(); // subset of functionality of dynamodb
 
+
+export function getAllR():Promise<any>{
+
+  return docClient.scan({ 
+  
+  TableName: 'reimburstments2',
+
+   
+  
+  }).promise()
+  
+  }
 export function saveR(r): Promise<any> {
     return docClient.put({
       TableName: 'reimburstments2',

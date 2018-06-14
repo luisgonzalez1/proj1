@@ -8,27 +8,87 @@ background: #3D7EAA;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to left, #FFE47A, #3D7EAA);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to left, #FFE47A, #3D7EAA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+  }
+/*  
+  table, tr, td, th
+  {
+      border: 1px solid black;
+      border-collapse:collapse;
+  }
+  tr.header
+  {
+      cursor:pointer;
+  }
+  .header .sign:after{
+    content:"+";
+    display:inline-block;      
+  }
+  .header.expand .sign:after{
+    content:"-";
+   } */
 
+   /* table, tr, td, th
+{
+    border: 1px solid black;
+    border-collapse:collapse;
+}
+tr.header
+{
+    cursor:pointer;
+} */
+
+/* tr {
+    display: none;
 }
 
+tr.header {
+    display: table-row;
+} */
 
-.btn_remove{
+/* .gang-name{
+    font-size:25px;
+    font-family:cursive;
+    background-color:lightgray;
+    cursor:pointer;
+}
+.members {
+    font-family:helvetica;
+}
+.blips {
+    color:red;
+}
+.crudz {
+    color:blue;
+}
+.satin-flings {
+    color:rgb(213, 194, 0);
+}
+td {
+    padding-right:10px;
+    padding-left:10px;
+} */
 
-
-    width: 0;
+/* tr {
     display: none;
-    
-    
-    
-    
-    }
-    tr:hover .btn_remove {
-    
-    
-        width: 40px;
-        display: block;
-         
-        
-    
-        
-    }
+}
+
+tr.header {
+    display: table-row;
+} */
+
+ 
+/* header
+{
+    cursor:pointer;
+}
+.content{
+
+    display: none
+}*/
+.disp{
+
+display:none;
+ 
+
+
+} 

@@ -82,8 +82,133 @@ status   : 'approved'
 ///////*******need to be worked  */
 
 rRouter.get('',(req:Request,resp:Response)=>{
-    console.log('retrieving all reimbuersements');
-    resp.json(r);
+
+    rService.getAllR()
+
+    .then((data)=>{
+              
+              console.log('data retrieved');
+              resp.json(data.Items);
+
+          })
+          .catch((err)=>{
+              console.log(err);
+          console.log('data not retrieved')
+          resp.sendStatus(500);
+
+          })                    
+  
+
+});
+
+rRouter.get('/pending',(req:Request,resp:Response)=>{
+
+    rService.getAllR()
+
+    .then((data)=>{
+              
+        let dataResults ={Items:[]}
+        for (let i=0 ;  i <data.Items.length ; i++){
+
+            if( data.Items[i].status === 'pending'){
+                 
+                  dataResults.Items.push( data.Items[i]);
+
+            }                 
+
+         }
+         resp.json(dataResults.Items);
+          })
+          .catch((err)=>{
+              console.log(err);
+          console.log('data not retrieved')
+          resp.sendStatus(500);
+
+          })                    
+  
+
+});
+
+rRouter.get('/history',(req:Request,resp:Response)=>{
+
+    rService.getAllR()
+
+    .then((data)=>{
+        let dataResults ={Items:[]}
+        for (let i=0 ;  i <data.Items.length ; i++){
+
+            if( data.Items[i].status === 'approved' || data.Items[i].status === 'denied'){
+                 
+                  dataResults.Items.push( data.Items[i]);
+
+            }                 
+
+         }
+         resp.json(dataResults.Items);
+          })
+          .catch((err)=>{
+              console.log(err);
+          console.log('data not retrieved')
+          resp.sendStatus(500);
+
+          })                    
+  
+
+});
+rRouter.get('/approved',(req:Request,resp:Response)=>{
+
+    rService.getAllR()
+
+    .then((data)=>{
+              
+        let dataResults ={Items:[]}
+        for (let i=0 ;  i <data.Items.length ; i++){
+
+            if( data.Items[i].status === 'approved'){
+                 
+                  dataResults.Items.push( data.Items[i]);
+
+            }                 
+
+         }
+         resp.json(dataResults.Items);
+
+          })
+          .catch((err)=>{
+              console.log(err);
+          console.log('data not retrieved')
+          resp.sendStatus(500);
+
+          })                    
+  
+
+});
+
+
+rRouter.get('/denied',(req:Request,resp:Response)=>{
+    authMiddleware('admin','employee'),
+    rService.getAllR()     
+    .then((data)=>{
+        let dataResults ={Items:[]}
+        for (let i=0 ;  i <data.Items.length ; i++){
+
+            if( data.Items[i].status === 'denied'){
+                 
+                  dataResults.Items.push( data.Items[i]);
+
+            }                 
+
+         }
+         resp.json(dataResults.Items);
+
+          })
+          .catch((err)=>{
+              console.log(err);
+          console.log('data not retrieved')
+          resp.sendStatus(500);
+
+          })                    
+  
 
 });
 

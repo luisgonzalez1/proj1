@@ -32,4 +32,9 @@ export function updateStatus(r){
 
 }
 
+export function getAllR(){
+
+    return rDao.getAllR();
+
  
+}

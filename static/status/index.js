@@ -229,37 +229,6 @@ function retreiveHistory() {
   let y=0;
   function addApprovedDenied(item){
 
-
-//  $('#Modal').append(` <!-- Modal -->
-//     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-//       <div class="modal-dialog" role="document">
-//         <div class="modal-content">
-//           <div class="modal-header">
-//             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-//             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//               <span aria-hidden="true">&times;</span>
-//             </button>
-//           </div>
-//           <div class="modal-body">
-//           <table>
-//             <tbody id= "moda-body">
-               
-               
-//             <tbody>
-//           </table>
-//           </div>
-//           <div class="modal-footer">
-//             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         
-//           </div>
-//         </div>
-//       </div>
-//     </div> `)
-
-   
-
-
-
    
     
     let itemStr="";
@@ -275,16 +244,14 @@ function retreiveHistory() {
              itemStr += ` 
             
              
-            
-            <tr>
-            <td>${item[key][i].title}</td>
-            <td> ${item[key][i].amount}</td> 
-            <td> ${item[key][i].description}</td> 
-            <td>  ${item[key][i].type}</td>
-
-             
-             </tr>
-              
+           
+            <tr class ='t${y} disp'>
+            <td >${item[key][i].title}</td>
+            <td > ${item[key][i].amount}</td> 
+            <td > ${item[key][i].description}</td> 
+            <td >  ${item[key][i].type}</td>             
+            </tr>
+           
              
              ` 
              
@@ -318,58 +285,61 @@ function retreiveHistory() {
 
     $('#movie-table-body').append(`
 
-    <tr class ='table-primary'>
-        <th scope="col">Username</th>
-        <th scope="col">Time Submitted</th>
-        <th scope="col">Staus</th>
-        <th scope="col">Approved by</th>
-    </tr>
+     
 
-    <tr class='table-info'>
+    <tr   class='table-info  header'>
 
       <td>${item.username}</td>
       <td>${dateStr}</td>
       <td>${item.status}</td>           
       <td>${item.approver}</td>  
+    </tr>
      
-    <tr class='table-active'>
-      <th scope="col">Title</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Description</th>
-      <th scope="col">Type</th>
+   
+   <tr   class='table-active disp '>
+       
+      <th>Title </th>
+      <th>Amount </th>
+      <th>Description</th>
+      <th>Type</th>
+   
      </tr>
+   
        ${itemStr}
-       
-       
+  
+    
+   
 
+       <tr class='disp'>
+       <td>
+       <div id='approveDenied${y}' class="btn-group btn-group-toggle" data-toggle="buttons">
+       <label  class="btn btn-secondary active" >
+         <input class='blue' type="radio" name="options" id="option1" autocomplete="off" checked value='pending'>Pending
+       </label>
+       <label class="btn btn-secondary" >
+         <input class='green'type="radio" name="options" id="option2" autocomplete="off" value='denied'>Approve
+       </label>
+       <label class="btn btn-secondary" >
+         <input class='red' type="radio" name="options" id="option2" autocomplete="off" value='approved'>Deny
+       </label>
+       
+     </div>
      
+       </td>
+ 
+       </tr>
       
        
       
     
          
-        
-      <td>
-      <div id='approveDenied${y}' class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label  class="btn btn-secondary active" >
-        <input class='blue' type="radio" name="options" id="option1" autocomplete="off" checked value='pending'>Pending
-      </label>
-      <label class="btn btn-secondary" >
-        <input class='green'type="radio" name="options" id="option2" autocomplete="off" value='denied'>Approve
-      </label>
-      <label class="btn btn-secondary" >
-        <input class='red' type="radio" name="options" id="option2" autocomplete="off" value='approved'>Deny
-      </label>
-      
-    </div>
-    
-      </td>
-
-      </tr>
+     
 
      
   `);
  
+
+  
     
   if ($('#sumit-status').text() === "" ){
     $('#sumit-status').append (`<button id='submit' class="btn btn-primary"  type="submit">Submit</button> ` )
@@ -379,78 +349,23 @@ function retreiveHistory() {
   
   
 
-  // $('#Modal').append(` <!-- Modal -->
-  //   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  //     <div class="modal-dialog" role="document">
-  //       <div class="modal-content">
-  //         <div class="modal-header">
-  //           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-  //           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-  //             <span aria-hidden="true">&times;</span>
-  //           </button>
-  //         </div>
-  //         <div class="modal-body">
-  //         <table>
-  //           <tbody id= "moda-body">
-               
-               
-  //           <tbody>
-  //         </table>
-  //         </div>
-  //         <div class="modal-footer">
-  //           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div> `)
-
-
-  // if ($('#form-footer').text() === "" ){
-  //    $('#form-footer').append (`</form>` )
-  //     }
+ 
   
   y++;
-  
 
-
-  // let approvedDenied = $('#approveDenied label.active input').val();
-  // //console.log(approvedDenied);
-  
-  // $(document).on('change', ('#approveDenied label.active input', function(){
-  //     console.log('changed');
-     
-  //     // $('#answer').append =`<span>${approvedDenied}</span>`;
-  //   }));
-   
-
- 
-  
-
-// item.status = " testing ";
-// item.approver = "approver tester "
-
-//console.log(item);
- 
   }
 
-  // let approvedDenied;
-  // $(document).on('change', ('#approveDenied label.active input', function(){
-  //   approvedDenied = $('#approveDenied label.active input').val();
-  //   console.log(approvedDenied)
+   
+ 
+
+  $(document).on('click', '.header', function(){
+     
+    //console.log( $(this).nextUntil('tr.header'));
+    $(this).nextUntil('tr.header').toggleClass('disp');
     
-  // item.status = " testing ";
-  // item.approver = "approver tester "
-
-
-// }));
-
-// $("#option1").click(function(){
-//   $("#option2").removeClass("active");
-//   $(this).addClass("active");
-// });
-
-    
+     
+    })
+ 
 
   function updateStatus(){
     
@@ -512,46 +427,7 @@ function retreiveHistory() {
 
 
   function addRItem(item) {
-    // const body = document.getElementById('movie-table-body');
-  
-    // const row = document.createElement('tr'); // create <tr>
-    // let data = document.createElement('td'); // create <td>
-    // data.innerText = item.status; // assign value to the td  // emp.role; emp.username;
-    // row.appendChild(data); // append the td to the row
-    // data = document.createElement('td');
-    // data.innerText = item.timeSubmitted;
-    // row.appendChild(data);
-    // data = document.createElement('td');
-    // data.innerText = item.username;
-    // row.appendChild(data);
-    // data = document.createElement('td');
-    // data.innerText = item.approver;
-    // row.appendChild(data);
-    // data = document.createElement('td');
-    // for (var key in item) {
-    //   if (key === 'item' ) {
-    //       console.log(key + " -> " + item[key]);
-    //       for(i in item[key]){
-                 
-    //         data.innerText = item[key][i].title;
-    //         data.innerText = item[key][i].amount;
-    //         data.innerText =item[key][i].description;
-    //         data.innerText = item[key][i].type;
-    //         let itemStr = (`Title : ${data.innerText = item[key][i].title} , Amount : ${data.innerText = item[key][i].title} , 
-    //        Description : ${data.innerText =item[key][i].description} ,Type : ${data.innerText = item[key][i].type}` )
-    //        data.innerText =itemStr
-    //       }
-    //   }
-    // }
-    // // data.innerText = item.item;
-    // row.appendChild(data);
-    // body.appendChild(row); // append the row to the body
-
-  
-    // let t =new Date(item.timeSubmitted).toLocaleTimeString("en-US");
-    // let d =new Date(item.timeSubmitted).toLocaleDateString("en-US");
-    // dateStr =  `${d} ${t}`;
-    // console.log(dateStr);
+    
     let itemStr;
     for (var key in item) {
       if (key === 'item' ) {
