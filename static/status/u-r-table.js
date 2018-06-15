@@ -22,10 +22,7 @@ function RItem()  {
   console.log(`user passes by session storage ${username}`);
 
 
-  // window.onload = function() {
-  //   $('#sumit-status').css({'display':'none'})
-  // };
-
+   window.onload=retreiveAll;
 
   function deniedApproveReimburstments(item){
 
@@ -113,7 +110,7 @@ function retreiveHistory() {
 
 
   function retreivePending() {
-    const year = document.getElementById('year-input').value;
+     
     //, {credentials: 'include'}
     fetch(`http://localhost:3000/r/name/${username}/pending`, {credentials: 'include'})
       .then(resp => {
@@ -152,8 +149,90 @@ function retreiveHistory() {
       });
   }
 
+
+  function retreiveDenied() {
+     
+    //, {credentials: 'include'}
+    fetch(`http://localhost:3000/r/name/${username}/denied`, {credentials: 'include'})
+      .then(resp => {
+        console.log(resp.status)
+        if(resp.status === 401 || resp.status === 403) {
+          return;
+        }        
+        return resp.json();
+      })
+      .then((historyData) => {
+  
+        // clear table;
+        const body = document.getElementById('movie-table-body');
+        body.innerHTML = '';
+
+        tableHeader();
+        
+        
+        // populate the table for each movie
+        historyData.forEach((item)=>{
+
+        //console.log(emp.role);
+        addRItem(item)
+
+        });
+       // console.log(empData);
+
+      })
+      .catch(err => {
+         console.log(err);
+        // const body = document.getElementById('movie-table-body');
+        // body.innerText = 'Unable to retreive data';
+         
+
+
+      });
+  }
+
+
+  function retreiveApproved() {
+    
+    //, {credentials: 'include'}
+    fetch(`http://localhost:3000/r/name/${username}/approved`, {credentials: 'include'})
+      .then(resp => {
+        console.log(resp.status)
+        if(resp.status === 401 || resp.status === 403) {
+          return;
+        }        
+        return resp.json();
+      })
+      .then((historyData) => {
+  
+        // clear table;
+        const body = document.getElementById('movie-table-body');
+        body.innerHTML = '';
+
+        tableHeader();
+        
+        
+        // populate the table for each movie
+        historyData.forEach((item)=>{
+
+        //console.log(emp.role);
+        addRItem(item)
+
+        });
+       // console.log(empData);
+
+      })
+      .catch(err => {
+         console.log(err);
+        // const body = document.getElementById('movie-table-body');
+        // body.innerText = 'Unable to retreive data';
+         
+
+
+      });
+  }
+
   function retreiveAll() {
-    const year = document.getElementById('year-input').value;
+    
     //, {credentials: 'include'}
     fetch(`http://localhost:3000/r/name/${username}/all`, {credentials: 'include'})
       .then(resp => {
@@ -290,11 +369,19 @@ function retreiveHistory() {
   `);
  
 
-  
+  console.log( localStorage.getItem('role'));
+ 
     
   if ($('#sumit-status').text() === "" ){
-    $('#sumit-status').append (`<button id='submit' class="btn btn-primary"  type="submit">Submit</button> ` )
+
+    if(localStorage.getItem('role') === 'employee'){
+    $('#sumit-status').append (`<button id='submit' name='employee-submit' class="btn btn-primary"  type="submit">Submit</button> ` )
+    }
+  else if(localStorage.getItem('role')=== 'admin'){
+    $('#sumit-status').append (`<button id='submit' name='admin-submit' class="btn btn-primary"  type="submit">Submit</button> ` )
+
   }
+}
 
   itemArr.push(item);
    
@@ -350,7 +437,17 @@ function retreiveHistory() {
       throw 'unable to update data ';
     })
     .then(data => {
-      window.location = '../status/index.html';
+
+
+
+      if(localStorage.getItem('role') === 'employee'){
+        window.location = '../status/index.html';
+        }
+      else if(localStorage.getItem('role')=== 'admin'){
+        window.location = '../status/admin.html';
+      }
+
+      
     })
     .catch(err => {
       console.log(err);
@@ -498,7 +595,7 @@ function retreiveHistory() {
   
     
     if ($('#sumit-status').text() !== "" ){
-      $('#sumit-status').empty().append (`<button id='submit' class="btn btn-primary"  type="submit">Submit</button> ` )
+      $('#sumit-status').empty()
     }
     
   

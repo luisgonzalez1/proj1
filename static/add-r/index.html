@@ -14,7 +14,9 @@
     crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="add.css">
+    <link rel="stylesheet" href="stat.css">
+    
   <!-- Custom styles for this template -->
   <!-- <link href="navbar.css" rel="stylesheet"> -->
 </head>
@@ -23,27 +25,15 @@
 
 
   
-   
+     
 
-
-
-
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body"> -->
-  <!-- MODAL HEADER -->
-   
+<!-- 
+////////////////////////////////////////////////onsubmit="event.preventDefault();  "/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  
             <div class='container ' > 
     
-                <form id ='rItems'class="needs-validation" novalidate onsubmit="event.preventDefault();  "> 
+                <form id ='rItems'class="needs-validation" novalidate > 
                   <table id='table' class='table table-borderless ' >
                     <tbody id='tbody'>
                       <tr>
@@ -104,32 +94,21 @@
                    <button id='submit' class="btn btn-primary"  type="submit">Submit Bundle</button>  
                    
                 </form>
-                <a href="../status/index.html"><button id="cancel-button" class="btn btn-danger">Cancel</button></a>
+                <span id ='submit-status'></span>
+                
                 </div>
         
               </div>
         
+<!-- 
+/////////////////////////////////////////<a href="../status/index.html"><button onsubmit="history.back();" id="cancel-button" class="btn btn-danger">Cancel</button></a>////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
 
+ 
 
-
-
-
-
- <!-- MODAL FOOTER -->
-          
-        <!-- </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
- -->
+ 
 
   
 
@@ -145,9 +124,10 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
-  <script src="index.js"></script>
-  <script src="add-R.js"></script>
-  <script src="../status/index.js"></script>
+    
+  
+   <script src="add.js"></script> 
+    
 </body>
 
 </html>

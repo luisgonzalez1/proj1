@@ -1,6 +1,21 @@
  
+  //  window.location = '../status/admin.html';
+  //  window.location = '../status/index.html';
+ 
+ 
  let username = localStorage.username;
+ let role = localStorage.getItem('role');
   
+ if(role === 'employee'){
+
+  $('#submit-status').append (`<a href="../status/index.html"><button onsubmit="history.back();" id="cancel-button" class="btn btn-danger">Cancel</button></a>` )
+ 
+ } else   if(role === 'admin'){
+  $('#submit-status').append (`<a href="../status/admin.html"><button onsubmit="history.back();" id="cancel-button" class="btn btn-danger">Cancel</button></a>` )
+
+ }
+
+ 
  console.log(`user passes by local storage ${username}`);
 
 function RItem()  {

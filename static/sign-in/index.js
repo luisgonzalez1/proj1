@@ -31,12 +31,24 @@ function login() {
     .then(data => {
       //.Items[0]
      // data.Items[0].username
-     localStorage.setItem('username',username);
-     console.log(data)
-      
-      
+    localStorage.setItem('username',username);
+     role = data.role ; 
+     console.log(role);
+    localStorage.setItem('role', role);
+     console.log(localStorage.getItem('role'));
+     //console.log(data)
+
+     
+    
+     if(data.role === 'employee'){
 
       window.location = '../status/index.html';
+     
+     } else   if(data.role === 'admin'){
+      window.location = '../status/admin.html';
+     }
+      
+      
     })
     .catch(err => {
       console.log(err);

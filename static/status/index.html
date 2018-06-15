@@ -16,12 +16,12 @@
 
   <!-- Custom styles for this template -->
   <link href="navbar.css" rel="stylesheet">
-  <link rel="stylesheet" href="../add-r/index.css">
+  <link rel="stylesheet" href="add.css">
 </head>
 
 <body >
   
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Expand at md</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -54,10 +54,184 @@
         <input class="form-control" type="text" placeholder="Search">
       </form>
     </div>
-  </nav>
+  </nav> -->
 
+
+
+
+
+  <!doctype html>
+  <html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+  
+    <title>Navbar Template for Bootstrap</title>
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous">
+      <link rel="stylesheet" href="stat.css">
+  
+    <!-- Custom styles for this template -->
+    <link href="navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="../add-r/index.css">
+  </head>
+  
+  <body >
+    
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Expand at md</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../sign-in/index.html">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
+      </div>
+    </nav>
+  
+    
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <a href="../add-r/index.html"><button  class="btn btn-primary">Add Reinbustment</button></a>
+        </div>
+        <div class="col-sm">
+          <button class="btn btn-danger" onclick="retreiveMovies()">Fetch</button>
+        </div>
+        <div class="col-sm">
+          year: <input id="year-input" type="number" placeholder="2018" />
+        </div>
+      </div>
+  
+      <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <a href="../add-r/index.html"><button class="btn btn-primary">Add Reinbursments </button></a>
+            </div>
+            <div class="col-sm">
+              <button class="btn btn-danger" onclick="retreiveHistory()">History</button>
+            </div>
+            <div class="col-sm">
+              <button class="btn btn-danger" onclick="retreiveAll()">All</button>
+            </div>
+            <div class="col-sm">
+              <button class="btn btn-danger" onclick="retreivePending()">Pending</button>
+              <div class="col-sm">
+                  <button class="btn btn-danger" onclick="deniedApproveReimburstments()">Approve</button>
+                </div>
+            </div>
+            <div class="col-sm">
+              <button class="btn btn-danger" onclick="retreiveAllR()">All Reinburstments</button>
+            </div>
+        </div>
+        <div class="col-sm">
+          <button class="btn btn-danger" onclick="retreiveAllPending()">All Pending </button>
+        </div>
+    </div>
+    <div class="col-sm">
+      <button class="btn btn-danger" onclick="retreiveAllApproved()">All Approved</button>
+    </div>
+  </div>
+  <div class="col-sm">
+    <button class="btn btn-danger" onclick="retreiveAllDenied()">All Denied</button>
+  </div>
+  </div>
+  
+  <div class="col-sm">
+    <button class="btn btn-danger" onclick="retreiveAllHistory()">History</button>
+  </div>
+  </div>
+            
+        
+   
+            
+          </div>
+          <div class="row">
+                  <div class="col-4">
+          
+      
+         
+        
+              </div>
+      
+              </div> 
+      
+      
+  
+  
+          
+   
+  
+  
+       
+          <!-- <span id ='form-header'></span> -->
+           <form id ='rItems'class="needs-validation" onsubmit=" event.preventDefault(); updateStatus(); setTimeout(function () { window.location.reload(); }, 10);    ">
+      
+   
+        <div class="col-8">
+           
+          <div class='scrollable'>
+          <table class='table .table-borderless table table-hover' id='p-table' >
+            <thead>
+              
+            </thead>
+            <tbody id="movie-table-body">
+              <tr>
+                 
+              </tr>
+              <tr>
+            </tbody>
+  
+            
+          </table>
+          <!-- <button id='submit1' class="btn btn-primary"  type="submit">Submit</button> -->
+          <span id ='sumit-status'></span>
+        </div>
+        
+          
+        </form>
+        </div>
+          <!-- <span id ='form-footer'></span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
   
  
+
 
 
 
@@ -72,9 +246,10 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
-  <script src="index.js"></script>
-  <script src="../r-table/index.js"></script>
-  <script src="../add-r/index.js"></script>
+  
+ <script src="u-r-table.js"></script>
+ <script src="../r-table/r-table.js"></script>
+  
 </body>
 
 </html>

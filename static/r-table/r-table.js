@@ -113,7 +113,7 @@
          historyData.forEach((item)=>{
  
          //console.log(emp.role);
-         addRItem(item)
+         addApprovedDenied(item)
  
          });
         // console.log(empData);
